@@ -1,0 +1,22 @@
+
+<view class='wordtype-list'>
+  <view class='wordtype-top-view'>
+    <view class='top-color'></view>
+    <text class='wordtype-top'>热门词汇</text>
+  </view>
+  <block wx:for='{{wordlist}}' wx:key='id' wx:for-item="item">
+    <view class='wordtype-item' bindtap='wordlist' data-id='{{item.id}}' data-cname='{{item.cn_word}}'>
+      <image class='wordtype-cover' src='{{base_img_url + item.category_img}}' mode='aspectFill'></image>
+      <text class='en-wordtype'>{{item.en_word}}</text>
+      <text class='cn-wordtype'>{{item.cn_word}}</text>
+    </view>
+  </block>
+  <view class='bottom-view' wx:if='{{no}}'>
+    <text class='bottom-txt'>没有更多啦</text>
+  </view>
+</view>
+
+<view class='version-content' wx:if='{{no}}'>
+  <text class='word-style'>萌宝学单词</text>
+  <text class='word-version' bindtap='version'>免责申明</text>
+</view>

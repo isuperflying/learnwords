@@ -1,0 +1,31 @@
+<view class='word-wrapper'>
+  <view wx:if='{{!is_test_result}}' class='word-view'>
+    <image class='current-img animated {{word_anim}}' src='{{current_word_img}}'></image>
+    <text class='en-word'>{{en_word}}</text>
+    <text class='cn-word'>{{cn_word}}</text>
+    <image class='keep-img' src='/images/add_keep.png'></image>
+  </view>
+  <view wx:if='{{is_test_result}}' class='word-test-result'>
+    <image src='{{result_img}}' class='test-result-img'></image>
+    <text class='result-txt'>{{result_txt}}</text>
+  </view>
+</view>
+<view class='word-play-view'>
+  <view class='play-view'>
+    <image class='play-img' src='{{play_img}}' bindtap='playWord'></image>
+    <text class='play-txt'>播放</text>
+  </view>
+  <view class='play-view'>
+    <image class='play-img' src='{{tape_img}}' bindtap='record'></image>
+    <text class='play-txt'>录音</text>
+  </view>
+  <view class='play-view'>
+    <image class='play-img' src='{{play_tape_img}}' bindtap='playTape'></image>
+    <text class='play-txt'>录音回放</text>
+  </view>
+</view>
+
+<view class='bottom-view'>
+  <view class='btn-view' bindtap='preWord'>上一个</view>
+  <view class='btn-view' bindtap='nextWord'>下一个</view>
+</view>

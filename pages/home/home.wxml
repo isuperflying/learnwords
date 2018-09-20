@@ -1,0 +1,29 @@
+<!--pages/home/home.wxml-->
+<view class='content-view'>
+  <view class='user-info-view'>
+      <view class='sign-view'>
+        <image class='sign-day-img' src='../../images/sign_day.png'></image>
+        <text class='sign-txt'>签到</text>
+      </view>
+      <view class='user-head-wrapper'>
+        <view class='user-head'>
+          <open-data type="userAvatarUrl"></open-data>
+        </view>
+        <open-data type="userNickName" class='nick-name'></open-data>
+      </view>
+      <view class='money-view'>
+        <image class='money-img' src='../../images/learn_money.png'></image>
+        <text class='money-txt'>学习币</text>
+      </view>
+  </view>
+
+  <view class='train-view'>
+      <image class='base-train-img' src='../../images/base_train.png' bindtap='basetrain'></image>
+      <image class='rank-img' src='../../images/rank_icon.png'></image>
+  </view>
+  <view class='keep-mail-view'>
+      <image class='my-keep-img' src='../../images/my_keep_icon.png'></image>
+      <image class='score-mail-img' src='../../images/score_mail.png'></image>
+  </view>
+  <image class='bottom-img' src='../../images/bottom_bg.png'></image>
+</view>

@@ -1,0 +1,21 @@
+{
+  "pages":[
+    "pages/home/home",
+    "pages/wordtype/wordtype",
+    "pages/wordread/wordread",
+    "pages/index/index",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#66ccff",
+    "navigationBarTitleText": "WeChat",
+    "navigationBarTextStyle":"white"
+  },
+  "plugins": {
+    "WechatSI": {
+      "version": "0.1.0",
+      "provider": "wx069ba97219f66d99"
+    }
+  }
+}

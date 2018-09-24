@@ -1,14 +1,20 @@
-<view class='word-wrapper'>
-  <view wx:if='{{!is_test_result}}' class='word-view'>
-    <image class='current-img animated {{word_anim}}' src='{{current_word_img}}'></image>
-    <text class='en-word'>{{en_word}}</text>
-    <text class='cn-word'>{{cn_word}}</text>
-    <image class='keep-img' src='/images/add_keep.png'></image>
-  </view>
-  <view wx:if='{{is_test_result}}' class='word-test-result'>
-    <image src='{{result_img}}' class='test-result-img'></image>
-    <text class='result-txt'>{{result_txt}}</text>
-  </view>
+<view class='swipper-wrapper'>
+  <swiper class='swipper' bindchange='changeWord' current='{{current_index}}'>
+    <block wx:for="{{words}}" wx:key='id' wx:item='{{item}}'>
+      <swiper-item class='swipper-item'>
+        <view wx:if='{{!is_test_result}}' class='word-view'>
+          <image class='current-img animated {{word_anim}}' src='{{item.current_word_img}}'></image>
+          <text class='en-word'>{{item.word}}</text>
+          <text class='cn-word'>{{item.word_mean}}</text>
+        </view>
+        <view wx:if='{{is_test_result}}' class='word-test-result'>
+          <image src='{{result_img}}' class='test-result-img'></image>
+          <text class='result-txt'>{{result_txt}}</text>
+        </view>
+      </swiper-item>
+    </block>
+  </swiper>
+  <image class='keep-img' src='/images/add_keep.png'></image>
 </view>
 <view class='word-play-view'>
   <view class='play-view'>
@@ -16,7 +22,7 @@
     <text class='play-txt'>播放</text>
   </view>
   <view class='play-view'>
-    <image class='play-img' src='{{tape_img}}' bindtap='record'></image>
+    <image class='play-img' src='{{tape_img}}' bindtouchstart="touchstart" bindtouchend="touchup"></image>
     <text class='play-txt'>录音</text>
   </view>
   <view class='play-view'>
@@ -28,4 +34,12 @@
 <view class='bottom-view'>
   <view class='btn-view' bindtap='preWord'>上一个</view>
   <view class='btn-view' bindtap='nextWord'>下一个</view>
+</view>
+
+<view wx:if="{{isSpeaking}}" class="speak-style">
+  <image class="sound-style" src="../../images/chat_icon_voice1.png"></image>
+  <image wx:if="{{j==2}}" class="sound-style" src="../../images/chat_icon_voice2.png"></image>
+  <image wx:if="{{j==3}}" class="sound-style" src="../../images/chat_icon_voice3.png"></image>
+  <image wx:if="{{j==4}}" class="sound-style" src="../../images/chat_icon_voice4.png"></image>
+  <image wx:if="{{j==5}}" class="sound-style" src="../../images/chat_icon_voice5.png"></image>
 </view>

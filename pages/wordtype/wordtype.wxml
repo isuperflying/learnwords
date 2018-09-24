@@ -2,7 +2,7 @@
 <view class='wordtype-list'>
   <view class='wordtype-top-view'>
     <view class='top-color'></view>
-    <text class='wordtype-top'>热门词汇</text>
+    <text class='wordtype-top'>单词分类</text>
   </view>
   <block wx:for='{{wordlist}}' wx:key='id' wx:for-item="item">
     <view class='wordtype-item' bindtap='wordlist' data-id='{{item.id}}' data-cname='{{item.cn_word}}'>

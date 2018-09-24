@@ -1,11 +1,13 @@
-// pages/home/home.js
+
+var baseUrl = 'https://www.antleague.com/'
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-
+    base_img_url: baseUrl + 'words/',
   },
 
   /**
@@ -15,6 +17,24 @@ Page({
     wx.setNavigationBarTitle({
       title: '萌宝学单词',
     })
+
+    var that = this
+    let url = baseUrl + 'querywords'
+    wx.request({
+      url: url,
+      data: {
+        'cid': 7
+      },
+      method: 'POST',
+      success: function (result) {
+        console.log(result.data.data)
+        //words = result.data.data
+        that.setData({
+          words: result.data.data
+        })
+      }
+    })
+
   },
 
   basetrain:function(){

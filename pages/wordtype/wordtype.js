@@ -20,7 +20,7 @@ Page({
    */
   onLoad: function(options) {
     wx.setNavigationBarTitle({
-      title: '萌宝学单词',
+      title: '单词分类',
     })
     wx.showLoading({
       title: '加载中',

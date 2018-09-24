@@ -7,7 +7,7 @@ var innerAudioContext
 var vowel_audio_src
 var isPlay = false
 
-var current_index = 6
+var current_index = 0
 var words
 var timer; // 计时器
 var currentObj
@@ -29,7 +29,9 @@ Page({
     play_tape_img: '../../images/play_record_icon.png',
     is_test_result: false,
     result_img: '../../images/result_yes.png',
-    result_txt:'太棒了，继续加油!'
+    result_txt: '太棒了，继续加油!',
+    isSpeaking: false,
+    j: 1, //帧动画初始图片  
   },
 
   /**
@@ -46,16 +48,24 @@ Page({
     wx.request({
       url: url,
       data: {
-        'cid': cid
+        'cid': 7
       },
       method: 'POST',
       success: function(result) {
         console.log(result.data.data)
         words = result.data.data
-        that.setCurrentWord()
+       
+        for (let i = 0; i < words.length; i++) {
+          words[i].current_word_img = baseUrl + 'words/' + words[i].word_img
+        }
+
+        that.setData({
+          words: words
+        })
+        
+         that.setCurrentWord()
       }
     })
-
   },
 
   setCurrentWord: function() {
@@ -68,7 +78,7 @@ Page({
         current_word_img: baseUrl + 'words/' + words[current_index].word_img,
         en_word: currentObj.word,
         cn_word: currentObj.word_mean,
-        word_anim: 'bounceIn'
+        //word_anim: 'bounceIn'
       })
       that.playWord()
     }, 300);
@@ -77,7 +87,7 @@ Page({
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function() {
-
+    this.initRecord()
   },
 
   preWord: function() {
@@ -90,8 +100,28 @@ Page({
       current_index--
       if (current_index > -1) {
         this.setCurrentWord()
+        this.setData({
+          current_index: current_index
+        })
       } else {
         current_index = 0;
+      }
+    }
+  },
+
+  changeWord: function(e) {
+    console.log(e.detail.current)
+    current_index = e.detail.current
+    clearTimeout(timer)
+    this.setData({
+      //word_anim: '',
+      is_test_result: false
+    })
+    if (words) {
+      if (current_index < words.length) {
+        this.setCurrentWord()
+      } else {
+        current_index = words.length - 1
       }
     }
   },
@@ -106,6 +136,9 @@ Page({
       current_index++
       if (current_index < words.length) {
         this.setCurrentWord()
+        this.setData({
+          current_index: current_index
+        })
       } else {
         current_index = words.length - 1
       }
@@ -161,14 +194,28 @@ Page({
       this.stopMusic()
     } else {
       this.setData({
-        is_test_result:false,
+        is_test_result: false,
         play_img: '/images/word_playing.png'
       })
       this.playMusic(vowel_audio_src, false)
     }
   },
 
-  record: function() {
+  //麦克风帧动画  
+  speaking: function() {
+    var that = this;
+    //话筒帧动画  
+    var i = 1;
+    this.timer = setInterval(function() {
+      i++;
+      i = i % 5;
+      that.setData({
+        j: i
+      })
+    }, 200);
+  },
+
+  initRecord: function() {
     var that = this
     tapeResult = ''
     manager.onRecognize = function(res) {
@@ -176,6 +223,12 @@ Page({
       tapeResult = res.result
     }
     manager.onStop = function(res) {
+
+      clearInterval(this.timer)
+      that.setData({
+        isSpeaking: false,
+      })
+
       isRecord = false
       console.log("record file path--->", res.tempFilePath)
       console.log("listen result --->", res.result)
@@ -221,7 +274,12 @@ Page({
     manager.onError = function(res) {
       console.error("error msg", res.msg)
     }
+  },
 
+  record: function() {
+    this.initRecord()
+    
+    console.log('isRecord-->' + isRecord)
     if (isRecord) {
       manager.stop();
       isRecord = false
@@ -229,6 +287,12 @@ Page({
         tape_img: '../../images/record_icon.png'
       })
     } else {
+      this.setData({
+        isSpeaking: true
+      })
+
+      this.speaking()
+
       manager.start({
         duration: 2000,
         lang: "en_US"
@@ -239,6 +303,42 @@ Page({
         tape_img: '../../images/recording.png'
       })
     }
+  },
+
+  touchstart: function() {
+    console.log('touchstart')
+    this.setData({
+      isSpeaking: true
+    })
+
+    this.speaking()
+
+    manager.start({
+      duration: 2000,
+      lang: "en_US"
+    })
+    isRecord = true;
+    this.setData({
+      is_test_result: false,
+      tape_img: '../../images/recording.png'
+    })
+  },
+  //手指抬起  
+  touchup: function() {
+    console.log('touchup')
+    clearInterval(this.timer)
+    this.setData({
+      isSpeaking: false,
+    })
+
+    var that = this
+    setTimeout(function() {
+      manager.stop();
+      isRecord = false
+      that.setData({
+        tape_img: '../../images/record_icon.png'
+      })
+    }, 300)
   },
 
   playTape: function(e) {
@@ -256,7 +356,8 @@ Page({
         this.playMusic(tapeAudioPath, false)
       } else {
         wx.showToast({
-          title: '暂无录音文件'
+          title: '暂无录音文件',
+          icon: 'none'
         })
       }
     }

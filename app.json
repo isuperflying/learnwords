@@ -14,7 +14,7 @@
   },
   "plugins": {
     "WechatSI": {
-      "version": "0.1.0",
+      "version": "0.2.0",
       "provider": "wx069ba97219f66d99"
     }
   }

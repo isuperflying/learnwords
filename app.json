@@ -1,5 +1,6 @@
 {
   "pages":[
+    "pages/testpay/testpay",
     "pages/home/home",
     "pages/wordtype/wordtype",
     "pages/wordread/wordread",

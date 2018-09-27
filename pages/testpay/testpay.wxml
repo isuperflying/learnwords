@@ -1,0 +1,2 @@
+<!--pages/testpay/testpay.wxml-->
+<button bindtap='paytest'>支付测试</button>

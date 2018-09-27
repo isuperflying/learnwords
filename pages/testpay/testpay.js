@@ -22,7 +22,7 @@ Page({
         if (res.code) {
           //发起网络请求
           wx.request({
-            url: 'http://192.168.80.97:8888/userLogin',
+            url: 'http://192.168.1.104:8888/userLogin',
             method: 'POST',
             data: {
               code: res.code
@@ -45,7 +45,7 @@ Page({
 
   getPayInfo:function(openid){
     wx.request({
-      url: 'http://192.168.80.97:8888/getpayinfo',
+      url: 'http://192.168.1.104:8888/getpayinfo',
       method: 'POST',
       data: {
         openid: openid

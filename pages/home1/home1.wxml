@@ -1,0 +1,5 @@
+<!--pages/home1/home1.wxml-->
+<view class='content-view'>
+  <image src='../../images/home_bg01.png' class='bg1' mode='widthFix'></image>
+  <image src='../../images/home_bg02.png' class='bg2' mode='widthFix'></image>
+</view>

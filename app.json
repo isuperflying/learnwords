@@ -1,7 +1,8 @@
 {
   "pages":[
-    "pages/testpay/testpay",
+    "pages/home1/home1",
     "pages/home/home",
+    "pages/testpay/testpay",
     "pages/wordtype/wordtype",
     "pages/wordread/wordread",
     "pages/index/index",
@@ -9,7 +10,7 @@
   ],
   "window":{
     "backgroundTextStyle":"light",
-    "navigationBarBackgroundColor": "#66ccff",
+    "navigationBarBackgroundColor": "#78c8ff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle":"white"
   },

@@ -1,0 +1,11 @@
+<view class="swiper-container">
+  <swiper class="swiper_box" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" circular='true' current='swiperCurrent' bindchange="swiperchange">
+    <!--<block wx:for="{{banners}}" wx:key="id">-->
+    <swiper-item class='swiper_item' wx:for="{{banners}}" wx:key="id">
+      <view class='slide-image-view' style="-webkit-transform: scale({{ swiperCurrent == index ? 0.8 : 0.62 }}) translate({{ (swiperCurrent == index - 1 || swiperCurrent == index + 1) ? (swiperCurrent - index) * 40 : 0 }}%, 0); -webkit-transition: 0.1s;">
+        <image bindtap="tapBanner" data-id="{{item.businessId}}" src="{{item.picUrl}}" class="slide-image" />
+      </view>
+    </swiper-item>
+  </swiper>
+
+</view>

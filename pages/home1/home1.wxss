@@ -21,3 +21,101 @@ page {
   bottom: 0;
   left: 0;
 }
+
+.user-head-wrapper {
+  width: 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 35rpx;
+  left: 335rpx;
+}
+
+.user-head {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4rpx solid #fff;
+}
+
+.nick-name {
+  margin-top: 5rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+}
+
+.rank-img {
+  width: 190rpx;
+  height: 190rpx;
+  position: fixed;
+  left: 30rpx;
+  top: 160rpx;
+}
+
+.rank-img {
+  width: 190rpx;
+  height: 190rpx;
+  position: fixed;
+  left: 22rpx;
+  top: 120rpx;
+}
+
+.sign-img {
+  width: 190rpx;
+  height: 190rpx;
+  position: fixed;
+  left: 22rpx;
+  top: 350rpx;
+}
+
+.keep-img {
+  width: 190rpx;
+  height: 190rpx;
+  position: fixed;
+  left: 30rpx;
+  bottom: 440rpx;
+}
+
+.store-img {
+  width: 220rpx;
+  height: 290rpx;
+  position: fixed;
+  right: 22rpx;
+  bottom: 420rpx;
+}
+
+.money-img {
+  width: 150rpx;
+  height: 200rpx;
+  position: fixed;
+  right: 30rpx;
+  top: 120rpx;
+}
+
+.bee-view {
+  width: 400rpx;
+  height: 450rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 240rpx;
+  left: 218rpx;
+}
+
+.bee-img {
+  width: 390rpx;
+  height: 370rpx;
+}
+
+.bee-text-img{
+  width: 240rpx;
+  height: 70rpx;
+  position: fixed;
+  top: 572rpx;
+  left: 290rpx;
+}

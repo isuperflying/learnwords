@@ -3,3 +3,20 @@
   <image src='../../images/home_bg01.png' class='bg1' mode='widthFix'></image>
   <image src='../../images/home_bg02.png' class='bg2' mode='widthFix'></image>
 </view>
+<view class='user-head-wrapper'>
+  <view class='user-head'>
+    <open-data type="userAvatarUrl"></open-data>
+  </view>
+  <open-data type="userNickName" class='nick-name'></open-data>
+</view>
+
+<image class='rank-img' src='../../images/home_bt_ranking_list.png'></image>
+<image class='sign-img' src='../../images/home_bt_sign_in.png'></image>
+<image class='keep-img' src='../../images/home_bt_favourite.png'></image>
+<image class='store-img' src='../../images/home_bt_store.png'></image>
+<image class='money-img' src='../../images/home_bt_money.png'></image>
+
+<view class='bee-view' bindtap='basetrain'>
+  <image class='bee-img' src='../../images/home_bg_bee.png'></image>
+  <image class='bee-text-img' src='../../images/home_bt_training.png'></image>
+</view>

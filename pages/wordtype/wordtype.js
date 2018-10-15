@@ -78,7 +78,7 @@ Page({
     var cid = e.currentTarget.dataset.id
     var cname = e.currentTarget.dataset.cname
     wx.navigateTo({
-      url: '/pages/wordread/wordread?cid=' + cid + '&cname=' + cname
+      url: '/pages/wordread1/wordread1?cid=' + cid + '&cname=' + cname
     })
   },
 

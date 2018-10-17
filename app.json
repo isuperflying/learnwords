@@ -1,10 +1,13 @@
 {
   "pages":[
-    "pages/test5/test5",
-    "pages/test2/test2",
-    "pages/home/home",
-    "pages/testpay/testpay",
+    
     "pages/home1/home1",
+    "pages/home/home",
+    
+    "pages/test2/test2",
+    
+    "pages/testpay/testpay",
+    "pages/wordread1/wordread1",
     "pages/wordtype/wordtype",
     "pages/wordread/wordread",
     "pages/index/index",

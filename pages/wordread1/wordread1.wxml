@@ -1,0 +1,34 @@
+<view class='list'>
+  <swiper indicator-dots="{{false}}" autoplay="{{false}}" previous-margin="{{'80rpx'}}" next-margin="{{'80rpx'}}" bindchange="swiperChange">
+    <block wx:for="{{words}}" wx:key="{{index}}">
+      <swiper-item>
+          <view class="slide-image-view-wrapper {{current_index == index ? 'active' : ''}}">
+            <view class="slide-image-view" >
+                <text class='current-num'>{{current_num}}/{{total_count}}</text>
+                <image src="{{item.current_word_img}}" class="slide-image"/>
+                <view class='word-info'>
+                    <text class='en-word'>{{item.word}}</text>
+                    <text class='cn-word'>{{item.word_mean}}</text>
+                </view>
+                <image class='keep-img' src="{{item.is_keep?keep_icon:not_keep_icon}}" bindtap='keepChange' data-i='{{index}}'></image>
+            </view>
+          </view>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>
+
+<view class='word-play-view'>
+  <view class='play-view'>
+    <image class='play-img' src='{{play_img}}' bindtap='playWord'></image>
+    <!-- <text class='play-txt'>播放</text> -->
+  </view>
+  <view class='play-view'>
+    <image class='play-img' src='{{tape_img}}' bindtouchstart="touchstart" bindtouchend="touchup"></image>
+    <!-- <text class='play-txt'>录音</text> -->
+  </view>
+  <view class='play-view'>
+    <image class='play-img' src='{{play_tape_img}}' bindtap='playTape'></image>
+    <!-- <text class='play-txt'>录音回放</text> -->
+  </view>
+</view>

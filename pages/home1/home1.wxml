@@ -16,7 +16,7 @@
 <image class='store-img' src='../../images/home_bt_store.png'></image>
 <image class='money-img' src='../../images/home_bt_money.png'></image>
 
-<view class='bee-view' bindtap='basetrain'>
+<view class='bee-view' bindtap='basetrain' animation="{{animationData}}">
   <image class='bee-img' src='../../images/home_bg_bee.png'></image>
   <image class='bee-text-img' src='../../images/home_bt_training.png'></image>
 </view>

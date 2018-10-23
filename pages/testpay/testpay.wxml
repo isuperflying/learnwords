@@ -1,2 +1,5 @@
 <!--pages/testpay/testpay.wxml-->
+
+<button bindgetuserinfo='userLogin' open-type='getUserInfo'>用户登录</button>
+<view style='height:100rpx;'></view>
 <button bindtap='paytest'>支付测试</button>

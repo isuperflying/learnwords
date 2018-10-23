@@ -102,9 +102,9 @@ page {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  position: fixed;
-  top: 240rpx;
-  left: 218rpx;
+  position: absolute;
+  bottom: 350rpx;
+  right: -20rpx;
 }
 
 .bee-img {

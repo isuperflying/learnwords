@@ -21,10 +21,10 @@ Page({
       timingFunction: "ease",
       delay: 0
     })
-    let bottom = 350
+    let bottom = 480
     let x = 1
     setInterval(function () {
-      bottom = 350 + Math.cos(x++) * 10
+      bottom = 480 + Math.cos(x++) * 30
       if (x > 1000) {
         x = 1
       }
@@ -32,7 +32,7 @@ Page({
       this.setData({
         animationData: animation.export()
       })
-    }.bind(this), 300)
+    }.bind(this), 400)
 
   },
 

@@ -32,3 +32,18 @@
     <!-- <text class='play-txt'>录音回放</text> -->
   </view>
 </view>
+
+<!--弹窗下载APP-->
+<view class="modal-mask" catchtouchmove="preventTouchMove" bindtap='hideModal' wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+    <view class='modal-top'>
+      <view class="modal-title">解锁小程序</view>
+      <view class='line-view'></view>
+      <view class='vip-remark'>开通会员，学习所有单词</view>
+      <view class='viy-buy'>
+        购买
+      </view>
+      <image src='../../images/vip_price.png' class='vip-price'></image>
+      <image src='../../images/top_close.png' class='top-close' bindtap='hideModal'></image>
+    </view>
+</view>

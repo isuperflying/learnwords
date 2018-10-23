@@ -32,7 +32,8 @@ Page({
     isSpeaking: false,
     j: 1, //帧动画初始图片
     current_num:2,
-    total_count:10
+    total_count:10,
+    showModal:true
   },
   swiperChange(e) {
     clearTimeout(timer)
@@ -401,6 +402,21 @@ Page({
       words: this.data.words
     })
   },
+
+  /**
+    * 弹出框蒙层截断touchmove事件
+    */
+  preventTouchMove: function () { },
+  /**
+   * 隐藏模态对话框
+   */
+  hideModal: function () {
+    console.log("hide");
+    this.setData({
+      showModal: false
+    });
+  },
+
   /**
    * 用户点击右上角分享
    */

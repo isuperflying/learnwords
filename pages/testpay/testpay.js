@@ -47,9 +47,19 @@ Page({
             signType: signType,
             paySign: paySign,
             success: function (res) {
+              console.log('pay success----')
               console.log(res)
+
+              //支付成功后更改用户的VIP状态
+              if (userInfo){
+                userInfo.isVip = true
+                wechat.saveUserInfo(userInfo)
+                app.globalData.userInfo = userInfo
+              }
+
             },
             fail: function (res) {
+              console.log('pay fail----')
               console.log(res)
             }
           })
@@ -76,13 +86,41 @@ Page({
         return wechat.getMyData(d);
       })
       .then(d => {
-        console.log("从后端获取的openid", d.data);
-        wechat.saveUserInfo(d.data.data)
-        app.globalData.userInfo = d.data.data
+        console.log("从后端获取的openId--->", d.data);
+        userInfo = d.data.data
+        wechat.saveUserInfo(userInfo)
+        app.globalData.userInfo = userInfo
       })
       .catch(e => {
         console.log(e);
       })
+  },
+
+  updateUserScore: function () {
+    console.log(userInfo.token)
+    wx.request({
+      url: 'http://192.168.80.97:8888/updateuserscore',
+      method: 'POST',
+      data: {
+        openid: userInfo.openId,
+        token: userInfo.token,
+        score: 11
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.code == 0) {
+
+        } else {
+          wx.showToast({
+            title: '数据异常，请重试',
+            icon: 'none'
+          })
+        }
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    })
   },
 
   /**

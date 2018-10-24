@@ -4,6 +4,7 @@ App({
   },
   
   globalData: {
-    userInfo: null
+    userInfo: null,
+    user_score:0
   }
 })

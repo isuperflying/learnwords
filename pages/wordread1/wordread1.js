@@ -16,13 +16,15 @@ var word_name
 var tapeResult
 var tapeAudioPath //录音文件
 var last_index = -1
-
+var user_is_vip = false
+var free_read_count = 3
+var userInfo
 Page({
   data: {
     swiperIndex: 0,
     musicStatus: 'on',
-    keep_icon:'../../images/is_keep.png',
-    not_keep_icon:'../../images/is_not_keep.png',
+    keep_icon: '../../images/is_keep.png',
+    not_keep_icon: '../../images/is_not_keep.png',
     play_img: '/images/word_bt_reading.png',
     tape_img: '../../images/word_bt_record.png',
     play_tape_img: '../../images/word_bt_play.png',
@@ -31,28 +33,18 @@ Page({
     result_txt: '太棒了，继续加油!',
     isSpeaking: false,
     j: 1, //帧动画初始图片
-    current_num:2,
-    total_count:10,
-    showModal:true
+    current_num: 1,
+    total_count: 1,
+    showModal: false
   },
-  swiperChange(e) {
-    clearTimeout(timer)
-    this.setData({
-      word_anim: '',
-      is_test_result: false
-    })
-    if (words) {
-      current_index = e.detail.current
-      this.setData({
-        current_index
-      })
-      this.setCurrentWord()
-    }
-  },
+
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
+    console.log('onLoad--->')
+    userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
+    user_is_vip = wx.getStorageSync('user_is_vip') || false
     //var cid = options.cid
     var cid = 7;
     console.log('cid--->' + cid)
@@ -67,7 +59,7 @@ Page({
         'cid': cid
       },
       method: 'POST',
-      success: function (result) {
+      success: function(result) {
         console.log(result.data.data)
         words = result.data.data
 
@@ -77,7 +69,8 @@ Page({
         }
 
         that.setData({
-          words: words
+          words: words,
+          total_count:words.length
         })
 
         that.setCurrentWord()
@@ -85,12 +78,40 @@ Page({
     })
   },
 
-  setCurrentWord: function () {
+  onShow:function(e){
+    console.log('onShow--->')
+  },
+
+  swiperChange(e) {
+    clearTimeout(timer)
+    let temp_index = e.detail.current
+    if (!user_is_vip && temp_index > free_read_count - 1){
+      this.setData({
+        showModal:true,
+        current_num: temp_index + 1
+      })
+    }else{
+      this.setData({
+        word_anim: '',
+        is_test_result: false,
+        current_num: temp_index+1
+      })
+      if (words) {
+        current_index = temp_index
+        this.setData({
+          current_index
+        })
+        this.setCurrentWord()
+      }
+    }
+  },
+
+  setCurrentWord: function() {
     var that = this
     currentObj = words[current_index]
     vowel_audio_src = baseUrl + 'words/mp3/' + currentObj.mp3_url
     word_name = currentObj.word.toLowerCase()
-    timer = setTimeout(function () {
+    timer = setTimeout(function() {
       that.setData({
         current_word_img: baseUrl + 'words/' + words[current_index].word_img,
         en_word: currentObj.word,
@@ -100,14 +121,15 @@ Page({
       that.playWord()
     }, 300);
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function () {
+  onReady: function() {
     this.initRecord()
   },
 
-  preWord: function () {
+  preWord: function() {
     clearTimeout(timer)
     this.setData({
       word_anim: '',
@@ -126,7 +148,7 @@ Page({
     }
   },
 
-  changeWord: function (e) {
+  changeWord: function(e) {
     console.log(e.detail.current)
     current_index = e.detail.current
     clearTimeout(timer)
@@ -143,7 +165,7 @@ Page({
     }
   },
 
-  nextWord: function () {
+  nextWord: function() {
     clearTimeout(timer)
     this.setData({
       word_anim: '',
@@ -206,24 +228,25 @@ Page({
     }
   },
 
-  playWord: function () {
-    if (isPlay) {
-      this.stopMusic()
-    } else {
-      this.setData({
-        is_test_result: false,
-        play_img: '/images/word_bt_reading.png'
-      })
-      this.playMusic(vowel_audio_src, false)
-    }
+  playWord: function() {
+    this.updateUserScore();
+    // if (isPlay) {
+    //   this.stopMusic()
+    // } else {
+    //   this.setData({
+    //     is_test_result: false,
+    //     play_img: '/images/word_bt_reading.png'
+    //   })
+    //   this.playMusic(vowel_audio_src, false)
+    // }
   },
 
   //麦克风帧动画  
-  speaking: function () {
+  speaking: function() {
     var that = this;
     //话筒帧动画  
     var i = 1;
-    this.timer = setInterval(function () {
+    this.timer = setInterval(function() {
       i++;
       i = i % 5;
       that.setData({
@@ -232,14 +255,14 @@ Page({
     }, 200);
   },
 
-  initRecord: function () {
+  initRecord: function() {
     var that = this
     tapeResult = ''
-    manager.onRecognize = function (res) {
+    manager.onRecognize = function(res) {
       console.log("current--->", res.result)
       tapeResult = res.result
     }
-    manager.onStop = function (res) {
+    manager.onStop = function(res) {
 
       clearInterval(this.timer)
       that.setData({
@@ -269,6 +292,10 @@ Page({
           console.log('result is same--->')
           result_img = '../../images/result_yes.png'
           result_txt = '太棒了，继续加油!'
+
+          //回答正确后，用户积分+1
+          app.globalData.user_score++;
+          that.updateUserScore();
         } else {
           result_img = '../../images/result_no.png'
           result_txt = '拼读错误，再试一次'
@@ -288,12 +315,40 @@ Page({
       })
     }
 
-    manager.onError = function (res) {
+    manager.onError = function(res) {
       console.error("error msg", res.msg)
     }
   },
 
-  record: function () {
+  updateUserScore: function () {
+    console.log(userInfo.token)
+    wx.request({
+      url: 'http://192.168.80.97:8888/updateuserscore',
+      method: 'POST',
+      data: {
+        openid: userInfo.openId,
+        token: userInfo.token,
+        score: app.globalData.user_score
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.code == 0) {
+          
+        } else {
+          wx.showToast({
+            title: '数据异常，请重试',
+            icon: 'none'
+          })
+        }
+      },
+      fail: function (err) {
+        console.log(err)
+      }
+    })
+  },
+
+
+  record: function() {
     this.initRecord()
 
     console.log('isRecord-->' + isRecord)
@@ -322,7 +377,7 @@ Page({
     }
   },
 
-  touchstart: function () {
+  touchstart: function() {
     console.log('touchstart')
     this.setData({
       isSpeaking: true
@@ -341,7 +396,7 @@ Page({
     })
   },
   //手指抬起  
-  touchup: function () {
+  touchup: function() {
     console.log('touchup')
     clearInterval(this.timer)
     this.setData({
@@ -349,7 +404,7 @@ Page({
     })
 
     var that = this
-    setTimeout(function () {
+    setTimeout(function() {
       manager.stop();
       isRecord = false
       that.setData({
@@ -358,7 +413,7 @@ Page({
     }, 300)
   },
 
-  playTape: function (e) {
+  playTape: function(e) {
     if (isPlay) {
       this.setData({
         play_tape_img: '../../images/play_tape_img.png'
@@ -383,7 +438,7 @@ Page({
   /**
    * 生命周期函数--监听页面隐藏
    */
-  onHide: function () {
+  onHide: function() {
     this.invisiable()
   },
 
@@ -391,11 +446,11 @@ Page({
    * 生命周期函数--监听页面卸载
    */
 
-  onUnload: function () {
+  onUnload: function() {
     this.invisiable()
   },
 
-  keepChange:function(e){
+  keepChange: function(e) {
     //let cindex = e.currentTarget.dataset.i
     this.data.words[current_index].is_keep = true
     this.setData({
@@ -404,23 +459,24 @@ Page({
   },
 
   /**
-    * 弹出框蒙层截断touchmove事件
-    */
-  preventTouchMove: function () { },
+   * 弹出框蒙层截断touchmove事件
+   */
+  preventTouchMove: function() {},
   /**
    * 隐藏模态对话框
    */
-  hideModal: function () {
+  hideModal: function() {
     console.log("hide");
     this.setData({
-      showModal: false
+      showModal: false,
+      current_index
     });
   },
 
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
+  onShareAppMessage: function() {
 
   }
 })

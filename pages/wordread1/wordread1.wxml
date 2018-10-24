@@ -1,5 +1,5 @@
 <view class='list'>
-  <swiper indicator-dots="{{false}}" autoplay="{{false}}" previous-margin="{{'80rpx'}}" next-margin="{{'80rpx'}}" bindchange="swiperChange">
+  <swiper indicator-dots="{{false}}" autoplay="{{false}}" current='{{current_index}}' previous-margin="{{'80rpx'}}" next-margin="{{'80rpx'}}" bindchange="swiperChange">
     <block wx:for="{{words}}" wx:key="{{index}}">
       <swiper-item>
           <view class="slide-image-view-wrapper {{current_index == index ? 'active' : ''}}">

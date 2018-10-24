@@ -131,8 +131,8 @@ swiper-item {
 
 .modal-dialog {
   position: fixed;
-  width: 540rpx;
-  left: 105rpx;
+  width: 660rpx;
+  left: 45rpx;
   top: 250rpx;
   flex-direction: column;
   justify-content: flex-start;
@@ -143,8 +143,8 @@ swiper-item {
 }
 
 .modal-top {
-  width: 540rpx;
-  height: 400rpx;
+  width: 660rpx;
+  height: 500rpx;
   background: white;
   border-radius: 20rpx;
   background: #fc696e;
@@ -163,34 +163,34 @@ swiper-item {
 .modal-title {
   font-size: 50rpx;
   color: #fff;
-  height: 150rpx;
-  line-height: 150rpx;
+  height: 180rpx;
+  line-height: 180rpx;
   border-top-left-radius: 20rpx;
   border-top-right-radius: 20rpx;
   background: #fc696e;
-  margin-left: 30rpx;
+  margin-left: 46rpx;
 }
 
 .line-view {
-  width: 500rpx;
+  width: 600rpx;
   height: 10rpx;
-  margin-left: 20rpx;
+  margin-left: 30rpx;
   background: #f9a728;
 }
 
 .vip-remark {
   height: 80rpx;
-  line-height: 80rpx;
   background: #fc696e;
   color: #fff;
-  margin-left: 30rpx;
-  font-size: 28rpx;
+  margin-left: 36rpx;
+  font-size: 32rpx;
+  margin-top: 30rpx;
 }
 
 .viy-buy {
-  width: 540rpx;
-  height: 100rpx;
-  line-height: 100rpx;
+  width: 660rpx;
+  height: 118rpx;
+  line-height: 118rpx;
   text-align: center;
   background: white;
   background: #ffdf0e;
@@ -208,13 +208,13 @@ swiper-item {
   width: 190rpx;
   height: 105rpx;
   position: absolute;
-  top: 20rpx;
-  right: 50rpx;
+  top: 32rpx;
+  right: 66rpx;
 }
 
 .top-close {
-  width: 66rpx;
-  height: 66rpx;
+  width: 72rpx;
+  height: 72rpx;
   position: absolute;
   top: -22rpx;
   right: -22rpx;

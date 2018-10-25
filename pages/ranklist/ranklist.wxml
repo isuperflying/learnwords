@@ -14,14 +14,14 @@
       </block>
     </view>
     <view class='rank-img-view'>
-      <image class='rank-head' src='{{item.head_url}}'></image>
+      <image class='rank-head' src='{{item.avatarUrl}}'></image>
     </view>
     <view class='rank-name-view'>
-      <text class='rank-nick-name'>{{item.nick_name}}</text>
+      <text class='rank-nick-name'>{{item.nickName}}</text>
     </view>
     <view class='score-view'>
-      <text class='total-score-text'>总积分</text>
-      <text class='total-score'>{{item.score}}</text>
+      <text class='total-score-text'>积分</text>
+      <text class='total-score'>{{item.user_score}}</text>
     </view>
   </view>
 </view>

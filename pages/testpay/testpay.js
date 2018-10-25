@@ -66,7 +66,7 @@ Page({
 
   getPayInfo: function() {
     wx.request({
-      url: 'http://192.168.80.97:8888/getpayinfo',
+      url: 'http://192.168.1.104:8888/getpayinfo',
       method: 'POST',
       data: {
         openid: userInfo.openId,
@@ -145,7 +145,7 @@ Page({
   updateUserScore: function() {
     console.log(userInfo.token)
     wx.request({
-      url: 'http://192.168.80.97:8888/updateuserscore',
+      url: 'http://192.168.1.104:8888/updateuserscore',
       method: 'POST',
       data: {
         openid: userInfo.openId,
@@ -175,7 +175,7 @@ Page({
     let ndate = util.formatDate(new Date);
     console.log(ndate)
     wx.request({
-      url: 'http://192.168.80.97:8888/todaysignstate',
+      url: 'http://192.168.1.104:8888/todaysignstate',
       method: 'POST',
       data: {
         openid: userInfo.openId,
@@ -234,7 +234,7 @@ Page({
     let ndate = util.formatDate(new Date);
     console.log(ndate)
     wx.request({
-      url: 'http://192.168.80.97:8888/signtoday',
+      url: 'http://192.168.1.104:8888/signtoday',
       method: 'POST',
       data: {
         openid: userInfo.openId,
@@ -267,7 +267,7 @@ Page({
 
   rankList:function(){
     wx.request({
-      url: 'http://192.168.80.97:8888/ranklist',
+      url: 'http://192.168.1.104:8888/ranklist',
       method: 'POST',
       data: {
         token: userInfo.token,

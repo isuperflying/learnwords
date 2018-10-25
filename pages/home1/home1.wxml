@@ -10,12 +10,38 @@
   <open-data type="userNickName" class='nick-name'></open-data>
 </view>
 
-<image class='rank-img' src='../../images/home_bt_ranking_list.png'></image>
-<image class='sign-img' src='../../images/home_bt_sign_in.png'></image>
+<image class='rank-img' src='../../images/home_bt_ranking_list.png' bindtap='rank'></image>
+<button class='rank-login-btn' wx:if='{{!is_login}}' bindgetuserinfo='rank' open-type='getUserInfo'></button>
+
+<image class='sign-img' src='../../images/home_bt_sign_in.png' bindtap='todaySign'></image>
+<button class='sign-img-btn' wx:if='{{!is_login}}' bindgetuserinfo='todaySign' open-type='getUserInfo'></button>
+
+
 <image class='keep-img' src='../../images/home_bt_favourite.png'></image>
-<image class='store-img' src='../../images/home_bt_store.png'></image>
+<image class='store-img' src='../../images/home_bt_store.png' bindtap='store'></image>
 <image class='money-img' src='../../images/home_bt_money.png'></image>
 
-<view class='bee-view' animation="{{animationData}}" bindtap='basetrain'>
-  <image class='bee-img' src='../../images/home_bg_bee.png'></image>
+<view class='bee-view' animation="{{animationData}}">
+  <view class='bee-wrapper'>
+    <image class='bee-img' src='../../images/home_bg_bee.png' bindtap='basetrain'></image>
+    <button class='bee-login-btn' wx:if='{{!is_login}}' bindgetuserinfo='userLogin' open-type='getUserInfo'></button>
+  </view>
 </view>
+
+<dialog isshow='{{show_dialog}}'>
+  <view class='dialog-bg'>
+      <image class='sign-top' src='../../images/sign_top.png'></image>
+      <image class='dialog-img' src='../../images/sign_dialog_bg.png'></image>
+      <view class='sign-days'>
+        <view wx:for='{{sign_days}}' wx:key='id' class="sign-day-item {{today == index ? 'today-sign':''}}">
+            <text class='current-day'>第{{item.day_num}}天</text>
+            <text wx:if='{{index < 5}}' class="current-score {{today == index ? 'today-score':''}}">+{{item.day_score}} 积分</text>
+            <text wx:if='{{index == 5}}' class="current-score {{today == index ? 'today-score':''}}">{{item.day_score}}</text>
+        </view>
+      </view>
+      <view class="sign-btn {{today_is_sign?'sign-done':''}}" bindtap='signDay'>
+          签到
+      </view>
+  </view>
+  <image class='close-img' src='../../images/top_close1.png' bindtap='closeDialog'></image>
+</dialog>

@@ -40,7 +40,7 @@
       <view class="modal-title">解锁小程序</view>
       <view class='line-view'></view>
       <view class='vip-remark'>开通会员，学习所有单词</view>
-      <view class='viy-buy'>
+      <view class='viy-buy' bindtap='vipBuy'>
         购买
       </view>
       <image src='../../images/vip_price.png' class='vip-price'></image>

@@ -1,3 +1,4 @@
+let wechat = require('../../utils/wechat.js');
 var baseUrl = 'https://www.antleague.com/'
 var plugin = requirePlugin("WechatSI")
 let manager = plugin.getRecordRecognitionManager()
@@ -44,7 +45,7 @@ Page({
   onLoad: function(options) {
     console.log('onLoad--->')
     userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
-    user_is_vip = wx.getStorageSync('user_is_vip') || false
+    user_is_vip = userInfo.is_vip == 1 ? true : false
     //var cid = options.cid
     var cid = 7;
     console.log('cid--->' + cid)
@@ -80,6 +81,9 @@ Page({
 
   onShow:function(e){
     console.log('onShow--->')
+    current_index = 0;
+    vowel_audio_src = null;
+    this.innerAudioContext = null;
   },
 
   swiperChange(e) {
@@ -107,6 +111,7 @@ Page({
   },
 
   setCurrentWord: function() {
+    console.log('current_index--->' + current_index)
     var that = this
     currentObj = words[current_index]
     vowel_audio_src = baseUrl + 'words/mp3/' + currentObj.mp3_url
@@ -229,16 +234,15 @@ Page({
   },
 
   playWord: function() {
-    this.updateUserScore();
-    // if (isPlay) {
-    //   this.stopMusic()
-    // } else {
-    //   this.setData({
-    //     is_test_result: false,
-    //     play_img: '/images/word_bt_reading.png'
-    //   })
-    //   this.playMusic(vowel_audio_src, false)
-    // }
+    if (isPlay) {
+      this.stopMusic()
+    } else {
+      this.setData({
+        is_test_result: false,
+        play_img: '/images/word_bt_reading.png'
+      })
+      this.playMusic(vowel_audio_src, false)
+    }
   },
 
   //麦克风帧动画  
@@ -455,6 +459,73 @@ Page({
     this.data.words[current_index].is_keep = true
     this.setData({
       words: this.data.words
+    })
+  },
+
+  vipBuy: function () {
+    var that = this
+    wx.request({
+      url: 'http://192.168.1.104:8888/getpayinfo',
+      method: 'POST',
+      data: {
+        openid: userInfo.openId,
+        token: userInfo.token
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.code == 0) {
+          var timestamp = res.data.data.timestamp + '' //时间戳
+          var nonceStr = res.data.data.nonceStr //随机数
+          var packages = res.data.data.package //prepay_id
+          var paySign = res.data.data.paySign //签名
+          var signType = 'MD5'
+
+          wx.requestPayment({
+            timeStamp: timestamp,
+            nonceStr: nonceStr,
+            package: packages,
+            signType: signType,
+            paySign: paySign,
+            success: function (res) {
+              console.log('pay success----')
+              //console.log(res)
+              wx.showToast({
+                title: '购买成功',
+                icon : 'none'
+              })
+              //支付成功后更改用户的VIP状态
+              user_is_vip = true
+              if (userInfo) {
+                userInfo.is_vip = 1
+                wechat.saveUserInfo(userInfo)
+                app.globalData.userInfo = userInfo
+              }
+              
+              current_index++;
+              that.setCurrentWord()
+              that.setData({
+                showModal: false
+              });
+            },
+            fail: function (res) {
+              console.log('pay fail----')
+              console.log(res)
+              wx.showToast({
+                title: '支付失败',
+                icon: 'none'
+              })
+            }
+          })
+        } else {
+          wx.showToast({
+            title: '数据异常，请重试',
+            icon: 'none'
+          })
+        }
+      },
+      fail: function (err) {
+        console.log(err)
+      }
     })
   },
 

@@ -1,12 +1,12 @@
 {
   "pages":[
+    "pages/home1/home1",
     "pages/testpay/testpay",
     "pages/ranklist/ranklist",
     
-    "pages/home1/home1",
+
     "pages/wordread1/wordread1",
-    
-    
+
     "pages/home/home",
     
     "pages/test2/test2",
@@ -20,7 +20,8 @@
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#78c8ff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle":"white",
+    "onReachBottomDistance":50
   },
   "plugins": {
     "WechatSI": {

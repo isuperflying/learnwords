@@ -5,3 +5,30 @@
 <button bindtap='paytest'>支付测试</button>
 <view style='height:100rpx;'></view>
 <button bindtap='updateUserScore'>更新积分</button>
+
+<view style='height:100rpx;'></view>
+<view class='sign-wrapper'>
+  <button bindtap='todaySignState' class='sign-test-btn'>签到</button>
+  <button class='sign-login-btn' wx:if='{{!is_login}}' bindgetuserinfo='todaySign' open-type='getUserInfo'></button>
+</view>
+
+<view style='height:100rpx;'></view>
+<button bindtap='rankList'>排行榜</button>
+
+<dialog isshow='{{show_dialog}}'>
+  <view class='dialog-bg'>
+      <image class='sign-top' src='../../images/sign_top.png'></image>
+      <image class='dialog-img' src='../../images/sign_dialog_bg.png'></image>
+      <view class='sign-days'>
+        <view wx:for='{{sign_days}}' wx:key='id' class="sign-day-item {{today == index ? 'today-sign':''}}">
+            <text class='current-day'>第{{item.day_num}}天</text>
+            <text wx:if='{{index < 5}}' class="current-score {{today == index ? 'today-score':''}}">+{{item.day_score}} 积分</text>
+            <text wx:if='{{index == 5}}' class="current-score {{today == index ? 'today-score':''}}">{{item.day_score}}</text>
+        </view>
+      </view>
+      <view class="sign-btn {{today_is_sign?'sign-done':''}}" bindtap='signDay'>
+          签到
+      </view>
+  </view>
+  <image class='close-img' src='../../images/top_close1.png' bindtap='closeDialog'></image>
+</dialog>

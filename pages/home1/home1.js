@@ -33,7 +33,7 @@ Page({
         animationData: animation.export()
       })
     }.bind(this), 400)
-
+    
   },
 
   basetrain: function () {

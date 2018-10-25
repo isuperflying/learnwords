@@ -7,7 +7,7 @@ Page({
   data: {
     ranklist: [{
         nick_name: 'jays2018',
-        head_url: '../../images/result_yes.png',
+        head_url: 'https://wx.qlogo.cn/mmopen/vi_32/DYAIOgq83eoBSS1UjlIF7IYnkS2TdQz8cUfo6Q7XuOUxGfVzW5icghlIPfIicdB4fibvlcseMkQACK73ibSQggd09g/132',
         score: 88
       },
       {

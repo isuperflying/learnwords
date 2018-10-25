@@ -1,7 +1,8 @@
 {
   "pages":[
-    "pages/ranklist/ranklist",
     "pages/testpay/testpay",
+    "pages/ranklist/ranklist",
+    
     "pages/home1/home1",
     "pages/wordread1/wordread1",
     

@@ -70,10 +70,12 @@ page {
 .rank-head {
   width: 80rpx;
   height: 80rpx;
+  border-radius: 50%;
+  border: 2px solid #fff;
 }
 
 .rank-name-view {
-  width: 35%;
+  width: 40%;
 }
 
 .rank-nick-name {
@@ -83,21 +85,21 @@ page {
 }
 
 .score-view {
-  width: 26%;
+  width: 20%;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  margin-right: 4%;
+  margin-right: 5%;
 }
 
 .total-score-text {
   font-size: 30rpx;
   color: #513212;
-  text-align: right;
+  text-align: center;
 }
 
 .total-score {
   font-size: 36rpx;
   color: #e67070;
-  text-align: right;
+  text-align: center;
 }

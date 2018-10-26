@@ -1,5 +1,6 @@
 let wechat = require('../../utils/wechat.js');
 var baseUrl = 'https://www.antleague.com/'
+var qiniuUrl = 'http://antleague.com/'
 var plugin = requirePlugin("WechatSI")
 let manager = plugin.getRecordRecognitionManager()
 
@@ -57,7 +58,9 @@ Page({
     wx.request({
       url: url,
       data: {
-        'cid': cid
+        cid: cid,
+        openid: userInfo.openId,
+        token: userInfo.token
       },
       method: 'POST',
       success: function(result) {
@@ -65,7 +68,7 @@ Page({
         words = result.data.data
 
         for (let i = 0; i < words.length; i++) {
-          words[i].current_word_img = baseUrl + 'words/' + words[i].word_img
+          words[i].current_word_img = qiniuUrl + 'words/' + words[i].word_img
           words[i].is_keep = false
         }
 
@@ -114,11 +117,11 @@ Page({
     console.log('current_index--->' + current_index)
     var that = this
     currentObj = words[current_index]
-    vowel_audio_src = baseUrl + 'words/mp3/' + currentObj.mp3_url
+    vowel_audio_src = qiniuUrl + 'words/mp3/' + currentObj.mp3_url
     word_name = currentObj.word.toLowerCase()
     timer = setTimeout(function() {
       that.setData({
-        current_word_img: baseUrl + 'words/' + words[current_index].word_img,
+        current_word_img: qiniuUrl + 'words/' + words[current_index].word_img,
         en_word: currentObj.word,
         cn_word: currentObj.word_mean,
         //word_anim: 'bounceIn'
@@ -327,7 +330,7 @@ Page({
   updateUserScore: function () {
     console.log(userInfo.token)
     wx.request({
-      url: 'http://192.168.80.97:8888/updateuserscore',
+      url: baseUrl + 'updateuserscore',
       method: 'POST',
       data: {
         openid: userInfo.openId,
@@ -465,7 +468,7 @@ Page({
   vipBuy: function () {
     var that = this
     wx.request({
-      url: 'http://192.168.1.104:8888/getpayinfo',
+      url: baseUrl + 'getpayinfo',
       method: 'POST',
       data: {
         openid: userInfo.openId,

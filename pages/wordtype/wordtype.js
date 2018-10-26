@@ -5,7 +5,7 @@ var baseUrl = 'https://www.antleague.com/'
 var list = null
 var page = 1
 var pSize = 20
-
+var userInfo
 Page({
 
   /**
@@ -25,11 +25,8 @@ Page({
     wx.showLoading({
       title: '加载中',
     })
+    userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
     this.loadData();
-  },
-
-  onShow: function(e) {
-
   },
 
   loadData: function() {
@@ -37,8 +34,10 @@ Page({
     let url = baseUrl + 'querywordtypes'
     wx.request({
       url: url,
-      data: {},
-      method: 'GET',
+      data: {
+        token: userInfo.token
+      },
+      method: 'POST',
       success: function(result) {
         wx.hideLoading()
         wx.stopPullDownRefresh();

@@ -1,3 +1,4 @@
+var baseUrl = 'https://www.antleague.com/'
 let wechat = require('../../utils/wechat.js');
 var util = require('../../utils/util.js') //引入微信自带的日期格式化
 var app = getApp();
@@ -130,7 +131,7 @@ Page({
     let ndate = util.formatDate(new Date);
     console.log(ndate)
     wx.request({
-      url: 'http://192.168.1.104:8888/todaysignstate',
+      url: baseUrl + 'todaysignstate',
       method: 'POST',
       data: {
         openid: userInfo.openId,
@@ -188,7 +189,7 @@ Page({
     let ndate = util.formatDate(new Date);
     console.log(ndate)
     wx.request({
-      url: 'http://192.168.1.104:8888/signtoday',
+      url: baseUrl + 'signtoday',
       method: 'POST',
       data: {
         openid: userInfo.openId,

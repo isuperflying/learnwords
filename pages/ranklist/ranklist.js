@@ -1,3 +1,4 @@
+var baseUrl = 'https://www.antleague.com/'
 let wechat = require('../../utils/wechat.js');
 var util = require('../../utils/util.js') //引入微信自带的日期格式化
 var app = getApp();
@@ -29,7 +30,7 @@ Page({
     var that = this
     userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
     wx.request({
-      url: 'http://192.168.1.104:8888/ranklist',
+      url: baseUrl + 'ranklist',
       method: 'POST',
       data: {
         token: userInfo.token,

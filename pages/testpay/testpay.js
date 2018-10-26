@@ -1,4 +1,5 @@
-// pages/testpay/testpay.js
+var baseUrl = 'https://www.antleague.com/'
+
 let wechat = require('../../utils/wechat.js');
 var util = require('../../utils/util.js') //引入微信自带的日期格式化
 var app = getApp();
@@ -45,18 +46,6 @@ Page({
     this.setData({
       show_dialog: 0
     })
-
-    wx.getSystemInfo({
-      success(res) {
-        console.log(res.model)
-        console.log(res.pixelRatio)
-        console.log(res.windowWidth)
-        console.log(res.windowHeight)
-        console.log(res.language)
-        console.log(res.version)
-        console.log(res.platform)
-      }
-    })
   },
 
   paytest: function() {
@@ -66,7 +55,7 @@ Page({
 
   getPayInfo: function() {
     wx.request({
-      url: 'http://192.168.1.104:8888/getpayinfo',
+      url: baseUrl + 'getpayinfo',
       method: 'POST',
       data: {
         openid: userInfo.openId,
@@ -145,7 +134,7 @@ Page({
   updateUserScore: function() {
     console.log(userInfo.token)
     wx.request({
-      url: 'http://192.168.1.104:8888/updateuserscore',
+      url: baseUrl + 'updateuserscore',
       method: 'POST',
       data: {
         openid: userInfo.openId,
@@ -175,7 +164,7 @@ Page({
     let ndate = util.formatDate(new Date);
     console.log(ndate)
     wx.request({
-      url: 'http://192.168.1.104:8888/todaysignstate',
+      url: baseUrl + 'todaysignstate',
       method: 'POST',
       data: {
         openid: userInfo.openId,
@@ -221,7 +210,7 @@ Page({
     userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
     if (userInfo) {
       is_from_sign = false
-      this.signDay()
+      this.todaySignState()
     } else {
       is_from_sign = true
       this.getUserInfo();
@@ -234,7 +223,7 @@ Page({
     let ndate = util.formatDate(new Date);
     console.log(ndate)
     wx.request({
-      url: 'http://192.168.1.104:8888/signtoday',
+      url: baseUrl + 'signtoday',
       method: 'POST',
       data: {
         openid: userInfo.openId,
@@ -267,7 +256,7 @@ Page({
 
   rankList:function(){
     wx.request({
-      url: 'http://192.168.1.104:8888/ranklist',
+      url: baseUrl + 'ranklist',
       method: 'POST',
       data: {
         token: userInfo.token,

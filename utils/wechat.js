@@ -1,3 +1,4 @@
+var baseUrl = 'https://www.antleague.com/'
 /**
  * Promise化小程序接口
  */
@@ -95,7 +96,7 @@ class Wechat {
    * @param {object} params 
    */
   static getMyData(params) {
-    let url = 'http://192.168.1.104:8888/cryptdata';
+    let url = baseUrl + 'cryptdata';
     return this.request(url, params, "POST", "application/x-www-form-urlencoded");
   };
 
@@ -104,7 +105,7 @@ class Wechat {
    * @param {object} params 
    */
   static getMyOpenid(params) {
-    let url = 'http://192.168.1.104:8888/userLogin';
+    let url = baseUrl + 'userLogin';
     return this.request(url, params, "POST", "application/x-www-form-urlencoded");
   };
 

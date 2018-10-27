@@ -69,12 +69,12 @@ Page({
 
         for (let i = 0; i < words.length; i++) {
           words[i].current_word_img = qiniuUrl + 'words/' + words[i].word_img
-          words[i].is_keep = false
+          words[i].is_keep = words[i].keep_id != null ? true : false
         }
 
         that.setData({
           words: words,
-          total_count:words.length
+          total_count: words.length
         })
 
         that.setCurrentWord()
@@ -82,7 +82,7 @@ Page({
     })
   },
 
-  onShow:function(e){
+  onShow: function(e) {
     console.log('onShow--->')
     current_index = 0;
     vowel_audio_src = null;
@@ -92,16 +92,16 @@ Page({
   swiperChange(e) {
     clearTimeout(timer)
     let temp_index = e.detail.current
-    if (!user_is_vip && temp_index > free_read_count - 1){
+    if (!user_is_vip && temp_index > free_read_count - 1) {
       this.setData({
-        showModal:true,
+        showModal: true,
         current_num: temp_index + 1
       })
-    }else{
+    } else {
       this.setData({
         word_anim: '',
         is_test_result: false,
-        current_num: temp_index+1
+        current_num: temp_index + 1
       })
       if (words) {
         current_index = temp_index
@@ -327,7 +327,7 @@ Page({
     }
   },
 
-  updateUserScore: function () {
+  updateUserScore: function() {
     console.log(userInfo.token)
     wx.request({
       url: baseUrl + 'updateuserscore',
@@ -337,10 +337,10 @@ Page({
         token: userInfo.token,
         score: app.globalData.user_score
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         if (res.data.code == 0) {
-          
+
         } else {
           wx.showToast({
             title: '数据异常，请重试',
@@ -348,7 +348,7 @@ Page({
           })
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         console.log(err)
       }
     })
@@ -458,14 +458,81 @@ Page({
   },
 
   keepChange: function(e) {
-    //let cindex = e.currentTarget.dataset.i
-    this.data.words[current_index].is_keep = true
-    this.setData({
-      words: this.data.words
+    let keep_state = this.data.words[current_index].is_keep
+    if(keep_state) {
+      this.cancelKeep();
+    }else{
+      this.addKeep();
+    }
+  },
+
+  addKeep:function(){
+    var that = this
+    wx.request({
+      url: baseUrl + 'addkeep',
+      method: 'POST',
+      data: {
+        openid: userInfo.openId,
+        token: userInfo.token,
+        wordId: that.data.words[current_index].id
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.code == 0) {
+          wx.showToast({
+            title: '已收藏',
+            icon: 'none'
+          })
+
+          that.data.words[current_index].is_keep = true
+          that.setData({
+            words: that.data.words
+          })
+
+        } else {
+          wx.showToast({
+            title: '数据异常，请重试',
+            icon: 'none'
+          })
+        }
+      }
     })
   },
 
-  vipBuy: function () {
+  cancelKeep: function () {
+    var that = this
+    wx.request({
+      url: baseUrl + 'cancelkeep',
+      method: 'POST',
+      data: {
+        openid: userInfo.openId,
+        token: userInfo.token,
+        wordId: that.data.words[current_index].id
+      },
+      success: function (res) {
+        console.log(res.data)
+        if (res.data.code == 0) {
+          wx.showToast({
+            title: '已取消收藏',
+            icon: 'none'
+          })
+
+          that.data.words[current_index].is_keep = false
+          that.setData({
+            words: that.data.words
+          })
+
+        } else {
+          wx.showToast({
+            title: '数据异常，请重试',
+            icon: 'none'
+          })
+        }
+      }
+    })
+  },
+
+  vipBuy: function() {
     var that = this
     wx.request({
       url: baseUrl + 'getpayinfo',
@@ -474,7 +541,7 @@ Page({
         openid: userInfo.openId,
         token: userInfo.token
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         if (res.data.code == 0) {
           var timestamp = res.data.data.timestamp + '' //时间戳
@@ -489,12 +556,12 @@ Page({
             package: packages,
             signType: signType,
             paySign: paySign,
-            success: function (res) {
+            success: function(res) {
               console.log('pay success----')
               //console.log(res)
               wx.showToast({
                 title: '购买成功',
-                icon : 'none'
+                icon: 'none'
               })
               //支付成功后更改用户的VIP状态
               user_is_vip = true
@@ -503,14 +570,14 @@ Page({
                 wechat.saveUserInfo(userInfo)
                 app.globalData.userInfo = userInfo
               }
-              
+
               current_index++;
               that.setCurrentWord()
               that.setData({
                 showModal: false
               });
             },
-            fail: function (res) {
+            fail: function(res) {
               console.log('pay fail----')
               console.log(res)
               wx.showToast({
@@ -526,7 +593,7 @@ Page({
           })
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         console.log(err)
       }
     })

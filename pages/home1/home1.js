@@ -84,7 +84,7 @@ Page({
         return wechat.getMyData(d);
       })
       .then(d => {
-        console.log("从后端获取的openId--->", d.data);
+        console.log("从后端获取的用户信息--->", d.data);
         userInfo = d.data.data
         wechat.saveUserInfo(userInfo)
         app.globalData.userInfo = userInfo

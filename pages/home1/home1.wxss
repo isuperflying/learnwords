@@ -69,7 +69,7 @@ page {
   height: 190rpx;
   position: fixed;
   left: 22rpx;
-  top: 350rpx;
+  bottom: 450rpx;
 }
 
 .sign-img-btn {
@@ -85,8 +85,8 @@ page {
   width: 190rpx;
   height: 190rpx;
   position: fixed;
-  left: 30rpx;
-  bottom: 440rpx;
+  right: 22rpx;
+  bottom: 450rpx;
 }
 
 .store-img {
@@ -113,8 +113,8 @@ page {
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: 480rpx;
-  right: 140rpx;
+  bottom: 550rpx;
+  right: 155rpx;
 }
 
 .bee-wrapper {

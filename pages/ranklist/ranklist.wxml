@@ -3,25 +3,23 @@
   <view class='top-text'>拼读排行榜</view>
 </view> -->
 
-<view>
-  <view wx:for='{{ranklist}}' wx:key='id' class='rank-item'>
-    <view class='rank-number-view'>
-      <block wx:if='{{index < 3}}'>
-        <image class='rank-first-img' src='../../images/rank{{index+1}}.png'></image>
-      </block>
-      <block wx:if='{{index >= 3}}'>
-          <view class='rank-number-text'>{{index+1}}</view>
-      </block>
-    </view>
-    <view class='rank-img-view'>
-      <image class='rank-head' src='{{item.avatarUrl}}'></image>
-    </view>
-    <view class='rank-name-view'>
-      <text class='rank-nick-name'>{{item.nickName}}</text>
-    </view>
-    <view class='score-view'>
-      <text class='total-score-text'>积分</text>
-      <text class='total-score'>{{item.user_score}}</text>
-    </view>
+<view wx:for='{{ranklist}}' wx:key='id' class='rank-item'>
+  <view class='rank-number-view'>
+    <block wx:if='{{index < 3}}'>
+      <image class='rank-first-img' src='../../images/rank{{index+1}}.png'></image>
+    </block>
+    <block wx:if='{{index >= 3}}'>
+      <view class='rank-number-text'>{{index+1}}</view>
+    </block>
+  </view>
+  <view class='rank-img-view'>
+    <image class='rank-head' src='{{item.avatarUrl}}'></image>
+  </view>
+  <view class='rank-name-view'>
+    <text class='rank-nick-name'>{{item.nickName}}</text>
+  </view>
+  <view class='score-view'>
+    <text class='total-score-text'>积分</text>
+    <text class='total-score'>{{item.user_score}}</text>
   </view>
 </view>

@@ -282,3 +282,24 @@ input-holder {
   width: 60rpx;
   height: 60rpx;
 }
+
+/**麦克风*/
+.speak-style {
+  position: fixed;
+  height: 240rpx;
+  width: 240rpx;
+  border-radius: 20rpx;
+  background: rgba(106, 106, 106, 0.7);
+  top: 40%;
+  left: 255rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.sound-style {
+  position: absolute;
+  width: 180rpx;
+  height: 139rpx;
+}

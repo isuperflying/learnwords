@@ -43,6 +43,13 @@ Page({
     wx.setNavigationBarTitle({
       title: '萌宝学单词'
     })
+    
+    wx.getSystemInfo({
+      success(res) {
+        app.globalData.current_system = res.platform
+        console.log(res.platform)
+      }
+    })
 
     userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
 
@@ -58,10 +65,10 @@ Page({
       delay: 0
     })
 
-    let bottom = 480
+    let bottom = 550
     let x = 1
     setInterval(function () {
-      bottom = 480 + Math.cos(x++) * 30
+      bottom = 550 + Math.cos(x++) * 30
       if (x > 1000) {
         x = 1
       }

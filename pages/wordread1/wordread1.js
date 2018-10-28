@@ -21,13 +21,16 @@ var last_index = -1
 var user_is_vip = false
 var free_read_count = 3
 var userInfo
+
+var current_system
+
 Page({
   data: {
     swiperIndex: 0,
     musicStatus: 'on',
     keep_icon: '../../images/is_keep.png',
     not_keep_icon: '../../images/is_not_keep.png',
-    play_img: '/images/word_bt_reading.png',
+    play_img: '/images/word_bt_read.png',
     tape_img: '../../images/word_bt_record.png',
     play_tape_img: '../../images/word_bt_play.png',
     is_test_result: false,
@@ -45,6 +48,10 @@ Page({
    */
   onLoad: function(options) {
     console.log('onLoad--->')
+    
+    //当前的系统版本
+    current_system = app.globalData.current_system
+    console.log(current_system)
     userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
     user_is_vip = userInfo.is_vip == 1 ? true : false
     //var cid = options.cid
@@ -92,24 +99,64 @@ Page({
   swiperChange(e) {
     clearTimeout(timer)
     let temp_index = e.detail.current
-    if (!user_is_vip && temp_index > free_read_count - 1) {
-      this.setData({
-        showModal: true,
-        current_num: temp_index + 1
-      })
-    } else {
-      this.setData({
-        word_anim: '',
-        is_test_result: false,
-        current_num: temp_index + 1
-      })
-      if (words) {
-        current_index = temp_index
+
+    if(current_system == 'android'){
+      if (!user_is_vip && temp_index > free_read_count - 1) {
         this.setData({
-          current_index
+          showModal: true,
+          current_num: temp_index + 1
         })
-        this.setCurrentWord()
+      } else {
+        this.setData({
+          word_anim: '',
+          is_test_result: false,
+          current_num: temp_index + 1
+        })
+        if (words) {
+          current_index = temp_index
+          this.setData({
+            current_index
+          })
+          this.setCurrentWord()
+        }
       }
+    } else if (current_system == 'ios'){
+      var that = this
+      if (temp_index > free_read_count - 1 && userInfo && userInfo.user_score < 10){
+          this.setData({
+            current_num: temp_index + 1
+          })
+          wx.showModal({
+            title: '提醒',
+            showCancel:false,
+            content: '请先评测学习，积分达标后，再继续后半部分学习',
+            success(res) {
+              if (res.confirm) {
+                console.log(current_index)
+                that.setData({
+                  current_index
+                });
+              }
+            }
+          })
+        }else{
+          this.setData({
+            word_anim: '',
+            is_test_result: false,
+            current_num: temp_index + 1
+          })
+          if (words) {
+            current_index = temp_index
+            this.setData({
+              current_index
+            })
+            this.setCurrentWord()
+          }
+        }
+    }else{
+        wx.showToast({
+          title: '开发工具',
+        })
     }
   },
 
@@ -208,7 +255,7 @@ Page({
     innerAudioContext.onEnded(() => {
       isPlay = false
       this.setData({
-        play_img: '/images/word_bt_reading.png',
+        play_img: '/images/word_bt_read.png',
         play_tape_img: '../../images/word_bt_play.png'
       })
     })
@@ -221,7 +268,7 @@ Page({
     }
     isPlay = false;
     this.setData({
-      play_img: '/images/word_bt_reading.png'
+      play_img: '/images/word_bt_read.png'
     })
   },
 
@@ -242,7 +289,7 @@ Page({
     } else {
       this.setData({
         is_test_result: false,
-        play_img: '/images/word_bt_reading.png'
+        play_img: '/images/word_bt_pause.png'
       })
       this.playMusic(vowel_audio_src, false)
     }
@@ -315,7 +362,7 @@ Page({
 
       that.setData({
         is_first: false,
-        tape_img: '../../images/record_icon.png',
+        tape_img: '../../images/word_bt_record.png',
         result_img: result_img,
         result_txt: result_txt,
         is_test_result: true
@@ -379,7 +426,7 @@ Page({
       isRecord = true;
       this.setData({
         is_test_result: false,
-        tape_img: '../../images/word_bt_record.png'
+        tape_img: '../../images/word_bt_recording.png'
       })
     }
   },
@@ -399,7 +446,7 @@ Page({
     isRecord = true;
     this.setData({
       is_test_result: false,
-      tape_img: '../../images/recording.png'
+      tape_img: '../../images/word_bt_recording.png'
     })
   },
   //手指抬起  
@@ -415,7 +462,7 @@ Page({
       manager.stop();
       isRecord = false
       that.setData({
-        tape_img: '../../images/record_icon.png'
+        tape_img: '../../images/word_bt_record.png'
       })
     }, 300)
   },
@@ -423,14 +470,14 @@ Page({
   playTape: function(e) {
     if (isPlay) {
       this.setData({
-        play_tape_img: '../../images/play_tape_img.png'
+        play_tape_img: '../../images/word_bt_play.png'
       })
       this.stopMusic()
     } else {
       if (tapeAudioPath) {
         this.setData({
           is_test_result: false,
-          play_tape_img: '../../images/play_tape_img.png'
+          play_tape_img: '../../images/word_bt_pause.png'
         })
         this.playMusic(tapeAudioPath, false)
       } else {

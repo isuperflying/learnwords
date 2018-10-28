@@ -47,3 +47,11 @@
       <image src='../../images/top_close.png' class='top-close' bindtap='hideModal'></image>
     </view>
 </view>
+
+<view wx:if="{{isSpeaking}}" class="speak-style">
+  <image class="sound-style" src="../../images/chat_icon_voice1.png"></image>
+  <image wx:if="{{j==2}}" class="sound-style" src="../../images/chat_icon_voice2.png"></image>
+  <image wx:if="{{j==3}}" class="sound-style" src="../../images/chat_icon_voice3.png"></image>
+  <image wx:if="{{j==4}}" class="sound-style" src="../../images/chat_icon_voice4.png"></image>
+  <image wx:if="{{j==5}}" class="sound-style" src="../../images/chat_icon_voice5.png"></image>
+</view>

@@ -18,7 +18,7 @@
 
 
 <image class='keep-img' src='../../images/home_bt_favourite.png'></image>
-<image class='store-img' src='../../images/home_bt_store.png' bindtap='store'></image>
+<!-- <image class='store-img' src='../../images/home_bt_store.png' bindtap='store'></image> -->
 <image class='money-img' src='../../images/home_bt_money.png'></image>
 
 <view class='bee-view' animation="{{animationData}}">

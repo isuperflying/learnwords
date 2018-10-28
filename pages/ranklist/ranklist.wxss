@@ -4,6 +4,12 @@ page {
   background: #78c8ff;
 }
 
+.rank-wrapper {
+  width: 100%;
+  height: 100%;
+  background: #78c8ff;
+}
+
 .top-view {
   width: 100%;
   height: 80rpx;

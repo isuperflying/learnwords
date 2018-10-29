@@ -1,0 +1,173 @@
+/* pages/wordread/wordread.wxss */
+@import "../../utils/animate.wxss";
+
+page {
+  width: 100%;
+  height: 100%;
+  background: #6cf;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.swipper-wrapper {
+  width: 76%;
+  height: 760rpx;
+  margin-top: 60rpx;
+  border-radius: 6px;
+  box-shadow: 0px 4px #e1e1e1;
+  background: #f8f8f8;
+  position: relative;
+}
+
+.swipper {
+  width: 100%;
+  height: 100%;
+}
+
+.swipper-item {
+  width: 100%;
+  height: 100%;
+}
+
+.word-view {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.word-test-result {
+  width: 100%;
+  height: 100%;
+  background: #f8f8f8;
+  border-radius: 6px;
+  box-shadow: 0px 4px #e1e1e1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.test-result-img {
+  width: 200rpx;
+  height: 200rpx;
+}
+
+.result-txt {
+  color: #ac8753;
+  font-size: 36rpx;
+  margin-top: 30rpx;
+}
+
+.current-img {
+  width: 480rpx;
+  height: 480rpx;
+}
+
+.en-word {
+  font-size: 52rpx;
+  color: #000;
+}
+
+.cn-word {
+  font-size: 36rpx;
+  color: #ac8753;
+  margin-top: 20rpx;
+}
+
+.word-play-view {
+  width: 80%;
+  height: 250rpx;
+  margin-top: 16rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.record-img {
+  width: 90rpx;
+  height: 90rpx;
+  position: absolute;
+  bottom: -45rpx;
+  left: 255rpx;
+}
+
+.play-view {
+  width: 33%;
+  height: 180rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.play-img {
+  width: 130rpx;
+  height: 130rpx;
+}
+
+.play-txt {
+  color: #333;
+  font-size: 26rpx;
+  margin-top: -10rpx;
+}
+
+.keep-img {
+  width: 50rpx;
+  height: 50rpx;
+  position: absolute;
+  bottom: 10rpx;
+  right: 20rpx;
+}
+
+.bottom-view {
+  width: 90%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  position: absolute;
+  margin-left: 5%;
+  left: 0;
+  bottom: 30rpx;
+}
+
+.btn-view {
+  background: #fff;
+  height: 80rpx;
+  display: flex;
+  color: #555;
+  align-items: center;
+  justify-content: center;
+  width: 36%;
+  border-radius: 20px;
+  font-size: 32rpx;
+  box-shadow: 2px 2px #f2f2f2;
+}
+
+/**麦克风*/
+
+.speak-style {
+  position: fixed;
+  height: 240rpx;
+  width: 240rpx;
+  border-radius: 20rpx;
+  background: rgba(106, 106, 106, 0.7);
+  top: 40%;
+  left: 255rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.sound-style {
+  position: absolute;
+  width: 180rpx;
+  height: 139rpx;
+}

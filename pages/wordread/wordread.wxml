@@ -1,39 +1,51 @@
-<view class='swipper-wrapper'>
-  <swiper class='swipper' bindchange='changeWord' current='{{current_index}}'>
-    <block wx:for="{{words}}" wx:key='id' wx:item='{{item}}'>
-      <swiper-item class='swipper-item'>
-        <view wx:if='{{!is_test_result}}' class='word-view'>
-          <image class='current-img animated {{word_anim}}' src='{{item.current_word_img}}'></image>
-          <text class='en-word'>{{item.word}}</text>
-          <text class='cn-word'>{{item.word_mean}}</text>
-        </view>
-        <view wx:if='{{is_test_result}}' class='word-test-result'>
-          <image src='{{result_img}}' class='test-result-img'></image>
-          <text class='result-txt'>{{result_txt}}</text>
-        </view>
+<view class='list'>
+  <swiper indicator-dots="{{false}}" autoplay="{{false}}" current='{{current_index}}' previous-margin="{{'80rpx'}}" next-margin="{{'80rpx'}}" bindchange="swiperChange">
+    <block wx:for="{{words}}" wx:key="{{index}}">
+      <swiper-item>
+          <view class="slide-image-view-wrapper {{current_index == index ? 'active' : ''}}">
+            <view class="slide-image-view" >
+                <text class='current-num'>{{current_num}}/{{total_count}}</text>
+                <image src="{{item.current_word_img}}" class="slide-image"/>
+                <view class='word-info'>
+                    <text class='en-word'>{{item.word}}</text>
+                    <text class='cn-word'>{{item.word_mean}}</text>
+                </view>
+                <image class='keep-img' src="{{item.is_keep?keep_icon:not_keep_icon}}" bindtap='keepChange' data-i='{{index}}'></image>
+            </view>
+          </view>
       </swiper-item>
     </block>
   </swiper>
-  <image class='keep-img' src='/images/add_keep.png'></image>
 </view>
+
 <view class='word-play-view'>
   <view class='play-view'>
     <image class='play-img' src='{{play_img}}' bindtap='playWord'></image>
-    <text class='play-txt'>播放</text>
+    <!-- <text class='play-txt'>播放</text> -->
   </view>
   <view class='play-view'>
     <image class='play-img' src='{{tape_img}}' bindtouchstart="touchstart" bindtouchend="touchup"></image>
-    <text class='play-txt'>录音</text>
+    <!-- <text class='play-txt'>录音</text> -->
   </view>
   <view class='play-view'>
     <image class='play-img' src='{{play_tape_img}}' bindtap='playTape'></image>
-    <text class='play-txt'>录音回放</text>
+    <!-- <text class='play-txt'>录音回放</text> -->
   </view>
 </view>
 
-<view class='bottom-view'>
-  <view class='btn-view' bindtap='preWord'>上一个</view>
-  <view class='btn-view' bindtap='nextWord'>下一个</view>
+<!--弹窗下载APP-->
+<view class="modal-mask" catchtouchmove="preventTouchMove" bindtap='hideModal' wx:if="{{showModal}}"></view>
+<view class="modal-dialog" wx:if="{{showModal}}">
+    <view class='modal-top'>
+      <view class="modal-title">解锁小程序</view>
+      <view class='line-view'></view>
+      <view class='vip-remark'>开通会员，学习所有单词</view>
+      <view class='viy-buy' bindtap='vipBuy'>
+        购买
+      </view>
+      <image src='../../images/vip_price.png' class='vip-price'></image>
+      <image src='../../images/top_close.png' class='top-close' bindtap='hideModal'></image>
+    </view>
 </view>
 
 <view wx:if="{{isSpeaking}}" class="speak-style">

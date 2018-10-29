@@ -1,15 +1,14 @@
 {
   "pages":[
-    
-    "pages/home1/home1",
-    "pages/testpay/testpay",
-    "pages/wordread1/wordread1",
-    "pages/ranklist/ranklist",
-    
     "pages/home/home",
+    "pages/wordread/wordread",
+    "pages/testpay/testpay",
+    "pages/wordread2/wordread2",
+    "pages/ranklist/ranklist",
+    "pages/home2/home2",
     "pages/test2/test2",
     "pages/wordtype/wordtype",
-    "pages/wordread/wordread",
+    
     "pages/index/index",
     "pages/logs/logs"
   ],

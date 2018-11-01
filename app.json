@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/home/home",
     "pages/wordread/wordread",
     "pages/testpay/testpay",
@@ -8,16 +8,16 @@
     "pages/home2/home2",
     "pages/test2/test2",
     "pages/wordtype/wordtype",
-    
+    "pages/about/about",
     "pages/index/index",
     "pages/logs/logs"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#78c8ff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"white",
-    "onReachBottomDistance":50
+    "navigationBarTextStyle": "white",
+    "onReachBottomDistance": 50
   },
   "plugins": {
     "WechatSI": {

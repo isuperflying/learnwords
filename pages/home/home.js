@@ -5,14 +5,14 @@ var app = getApp();
 let userInfo
 var is_from_sign = false
 var current_page = 1
-var jump_type = 1 //1基础训练，2排行榜，3签到
+var jump_type = 1 //1基础训练，2排行榜，3签到,4收藏
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    is_login:false,
+    is_login: false,
     sign_days: [{
       day_num: 1,
       day_score: 1
@@ -21,24 +21,24 @@ Page({
       day_score: 3
     }, {
       day_num: 3,
-        day_score: 'VIP免费'
+      day_score: 'VIP免费'
     }],
     today: 0,
     today_is_sign: false,
     is_nav: true,
     isUse: true,
-    new_app_id:'wx181d47e91d301a20'
+    new_app_id: 'wx181d47e91d301a20'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
+  onLoad: function(options) {
 
     wx.setNavigationBarTitle({
       title: '萌宝学单词'
     })
-    
+
     wx.getSystemInfo({
       success(res) {
         app.globalData.current_system = res.platform
@@ -48,9 +48,9 @@ Page({
 
     userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
     console.log(userInfo)
-    if(userInfo){
+    if (userInfo) {
       this.setData({
-        is_login:true
+        is_login: true
       })
     }
 
@@ -62,7 +62,7 @@ Page({
 
     let bottom = 550
     let x = 1
-    setInterval(function () {
+    setInterval(function() {
       bottom = 550 + Math.cos(x++) * 30
       if (x > 1000) {
         x = 1
@@ -72,10 +72,10 @@ Page({
         animationData: animation.export()
       })
     }.bind(this), 400)
-    
+
     var that = this
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         console.log('sdk version--->' + res.SDKVersion)
         var result = that.compareVersion(res.SDKVersion, '2.0.7')
         that.setData({
@@ -85,7 +85,7 @@ Page({
     })
   },
 
-  userLogin: function (e) {
+  userLogin: function(e) {
     jump_type = 1
     this.getUserInfo();
   },
@@ -102,27 +102,29 @@ Page({
         wechat.saveUserInfo(userInfo)
         app.globalData.userInfo = userInfo
         that.data.is_login = true
-        if(jump_type == 1){
+        if (jump_type == 1) {
           that.basetrain()
-        }else if(jump_type == 2) {
+        } else if (jump_type == 2) {
           that.rankList()
-        }else{
+        } else if(jump_type == 3){
           that.todaySignState()
+        }else{
+          that.mycollect()
         }
-        
+
       })
       .catch(e => {
         console.log(e);
       })
   },
 
-  basetrain: function () {
+  basetrain: function() {
     wx.navigateTo({
       url: '/pages/wordtype/wordtype',
     })
   },
-  
-  rank:function(){
+
+  rank: function() {
     userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
     if (userInfo) {
       this.rankList()
@@ -132,14 +134,14 @@ Page({
     }
   },
 
-  rankList: function () {
-      wx.navigateTo({
-        url: '/pages/ranklist/ranklist',
-      })
+  rankList: function() {
+    wx.navigateTo({
+      url: '/pages/ranklist/ranklist',
+    })
   },
 
   //获取用户的当天签到状态
-  todaySignState: function () {
+  todaySignState: function() {
     var that = this
     let ndate = util.formatDate(new Date);
     console.log(ndate)
@@ -151,7 +153,7 @@ Page({
         token: userInfo.token,
         sdate: ndate
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         if (res.data.code == 0) {
           console.log('sign count--->' + res.data.data[0].sign_count)
@@ -166,7 +168,7 @@ Page({
               today: parseInt(userInfo.sign_day_num || 0)
             })
           } else {
-            
+
             that.setData({
               today_is_sign: false,
               today: parseInt(userInfo.sign_day_num || 0),
@@ -180,14 +182,14 @@ Page({
           })
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         console.log(err)
       }
     })
   },
 
   //签到
-  todaySign: function () {
+  todaySign: function() {
     userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
     if (userInfo) {
       this.todaySignState()
@@ -198,7 +200,7 @@ Page({
   },
 
   //新增签到
-  signDay: function () {
+  signDay: function() {
     var that = this
     let ndate = util.formatDate(new Date);
     console.log(ndate)
@@ -210,7 +212,7 @@ Page({
         token: userInfo.token,
         sdate: ndate
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         if (res.data.code == 0) {
           console.log(res.data)
@@ -219,9 +221,9 @@ Page({
           app.globalData.userInfo = userInfo;
           wechat.saveUserInfo(userInfo);
 
-          if (userInfo.sign_day_num == 3){
+          if (userInfo.sign_day_num == 3) {
             that.updateTestVip();
-          }else{
+          } else {
             wx.showToast({
               title: '签到成功',
               icon: 'none'
@@ -239,14 +241,14 @@ Page({
           })
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         console.log(err)
       }
     })
   },
 
   //获取用户的当天签到状态
-  updateTestVip: function () {
+  updateTestVip: function() {
     var that = this
     let end_date = util.getLaterDate(7)
     console.log(end_date)
@@ -258,7 +260,7 @@ Page({
         token: userInfo.token,
         end_date: end_date
       },
-      success: function (res) {
+      success: function(res) {
         console.log(res.data)
         if (res.data.code == 0) {
           wx.showToast({
@@ -275,13 +277,13 @@ Page({
           })
         }
       },
-      fail: function (err) {
+      fail: function(err) {
         console.log(err)
       }
     })
   },
 
-  store:function(){
+  store: function() {
     wx.showToast({
       title: '尽请期待',
       icon: 'none'
@@ -289,13 +291,13 @@ Page({
     return;
   },
 
-  closeDialog: function () {
+  closeDialog: function() {
     this.setData({
       show_dialog: 0
     })
   },
 
-  newApp: function (e) {
+  newApp: function(e) {
     if (this.data.isUse) {
       return;
     }
@@ -305,7 +307,7 @@ Page({
     })
   },
 
-  compareVersion: function (v1, v2) {
+  compareVersion: function(v1, v2) {
     v1 = v1.split('.')
     v2 = v2.split('.')
     var len = Math.max(v1.length, v2.length)
@@ -331,10 +333,38 @@ Page({
     return 0
   },
 
+  collect: function () {
+    userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
+    if (userInfo) {
+      this.mycollect()
+    } else {
+      jump_type = 4
+      this.getUserInfo();
+    }
+  },
+
+  mycollect: function() {
+    var cid = 0
+    var cname = '我的收藏'
+    wx.navigateTo({
+      url: '/pages/wordread/wordread?cid=' + cid + '&cname=' + cname
+    })
+  },
+
+  about:function(e){
+    wx.navigateTo({
+      url: '/pages/about/about',
+    })
+  },
+
   /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-
-  }
+    return {
+      title: '卡片式学单词，记忆快还有趣哦!',
+      path: '/pages/home/home',
+      imageUrl: '../../images/share_img.png'
+    }
+  },
 })

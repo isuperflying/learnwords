@@ -16,11 +16,14 @@
 <image class='sign-img' src='../../images/home_bt_sign_in.png' bindtap='todaySign'></image>
 <button class='sign-img-btn' wx:if='{{!is_login}}' bindgetuserinfo='todaySign' open-type='getUserInfo'></button>
 
+<image class='about' src='../../images/about.png' bindtap='about'></image>
 
-<image class='keep-img' src='../../images/home_bt_favourite.png'></image>
+<image class='keep-img' src='../../images/home_bt_favourite.png' bindtap='collect'></image>
+<button class='keep-login-btn' wx:if='{{!is_login}}' bindgetuserinfo='collect' open-type='getUserInfo'></button>
+
 <!-- <image class='store-img' src='../../images/home_bt_store.png' bindtap='store'></image> -->
 <image class='money-img' src='../../images/home_bt_money.png' bindtap='newApp'></image>
-<navigator class="nav-view" wx:if='{{isUse}}' target="miniProgram" open-type="navigate" app-id="{{new_app_id}}" path="" extra-data="" version="release"></navigator>
+<navigator class="nav-view" wx:if='{{isUse}}' target="miniProgram" open-type="navigate" app-id="{{new_app_id}}" ></navigator>
 
 
 <view class='bee-view' animation="{{animationData}}">

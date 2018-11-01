@@ -87,6 +87,17 @@ page {
   position: fixed;
   right: 22rpx;
   bottom: 450rpx;
+  z-index: 1;
+}
+
+.keep-login-btn {
+  width: 190rpx;
+  height: 190rpx;
+  position: fixed;
+  right: 22rpx;
+  bottom: 450rpx;
+  background: rgba(255,255,255,0);
+  z-index: 2;
 }
 
 .store-img {
@@ -288,4 +299,14 @@ button,button::after {
   left: 0;
   top: 0;
   background: rgba(255, 255, 255, 0);
+}
+
+.about {
+  width: 80rpx;
+  height: 80rpx;
+  position: fixed;
+  right: 22rpx;
+  top: 400rpx;
+  z-index: 1;
+  border-radius: 10px;
 }

@@ -23,6 +23,9 @@ Page({
     })
     list = null
     current_page = 1;
+    wx.showLoading({
+      title: '加载中',
+    })
     this.loadDataByPage();
   },
   
@@ -37,10 +40,8 @@ Page({
         page: current_page
       },
       success: function (result) {
-        wx.showToast({
-          title: '请求成功',
-        })
         //console.log(result.data)
+        wx.hideLoading()
         wx.stopPullDownRefresh();
         if (result.data.code == 0) {
           if (list == null) {
@@ -60,6 +61,7 @@ Page({
         }
       },
       fail: function (err) {
+        wx.hideLoading()
         wx.stopPullDownRefresh();
         console.log(err)
       }

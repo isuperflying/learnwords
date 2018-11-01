@@ -1,6 +1,6 @@
 let wechat = require('../../utils/wechat.js');
 var baseUrl = 'https://www.antleague.com/'
-var qiniuUrl = 'http://antleague.com/'
+var qiniuUrl = 'https://www.antleague.com/'
 var plugin = requirePlugin("WechatSI")
 var util = require('../../utils/util.js') //引入微信自带的日期格式化
 let manager = plugin.getRecordRecognitionManager()
@@ -20,7 +20,7 @@ var tapeResult
 var tapeAudioPath //录音文件
 var last_index = -1
 var user_is_vip = false
-var free_read_count = 3
+var free_read_count = 6
 var userInfo
 
 var current_system
@@ -64,12 +64,17 @@ Page({
       user_is_vip = true
     }
 
-    //var cid = options.cid
-    var cid = 7;
+    var cid = options.cid
+    //var cid = 7;
     console.log('cid--->' + cid)
     wx.setNavigationBarTitle({
       title: options.cname || '萌宝学单词',
     })
+
+    wx.showLoading({
+      title: '正在加载中',
+    })
+
     var that = this
     let url = baseUrl + 'querywords'
     wx.request({
@@ -81,22 +86,39 @@ Page({
       },
       method: 'POST',
       success: function(result) {
+        wx.hideLoading()
         console.log(result.data.data)
-        words = result.data.data
+        if (result.data.data != null && result.data.data.length > 0){
+          words = result.data.data
 
-        for (let i = 0; i < words.length; i++) {
-          words[i].current_word_img = qiniuUrl + 'words/' + words[i].word_img
-          words[i].is_keep = words[i].keep_id != null ? true : false
+          for (let i = 0; i < words.length; i++) {
+            words[i].current_word_img = qiniuUrl + 'words/' + words[i].word_img
+            words[i].is_keep = words[i].keep_id != null || cid == 0 ? true : false
+          }
+
+          that.setData({
+            words: words,
+            total_count: words.length
+          })
+
+          that.setCurrentWord()
+        }else{
+          wx.showToast({
+            title: cid == 0 ? '你还没有收藏哦' : '暂无数据',
+            icon: 'none'
+          })
+          
+          setTimeout(function(){
+              wx.navigateBack();
+          },2000)
         }
-
-        that.setData({
-          words: words,
-          total_count: words.length
-        })
-
-        that.setCurrentWord()
+      },
+      fail:function(e){
+        wx.hideLoading()
       }
     })
+
+    this.initRecord();
   },
 
   onShow: function(e) {
@@ -164,9 +186,9 @@ Page({
         }
       }
     } else {
-      wx.showToast({
-        title: '开发工具',
-      })
+      // wx.showToast({
+      //   title: '开发工具',
+      // })
     }
   },
 
@@ -190,9 +212,9 @@ Page({
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
-  onReady: function() {
-    this.initRecord()
-  },
+  // onReady: function() {
+  //   this.initRecord()
+  // },
 
   preWord: function() {
     clearTimeout(timer)
@@ -327,7 +349,7 @@ Page({
       tapeResult = res.result
     }
     manager.onStop = function(res) {
-
+      console.log(res)
       clearInterval(this.timer)
       that.setData({
         isSpeaking: false,
@@ -355,19 +377,19 @@ Page({
         if (tapeResult == word_name) {
           console.log('result is same--->')
           result_img = '../../images/result_yes.png'
-          result_txt = '太棒了，继续加油!'
+          result_txt = '太棒了，继续加油哦!'
 
           //回答正确后，用户积分+1
           app.globalData.user_score++;
           that.updateUserScore();
         } else {
           result_img = '../../images/result_no.png'
-          result_txt = '拼读错误，再试一次'
+          result_txt = '拼读错误，再试一次吧!'
         }
 
       } else {
         result_img = '../../images/result_no.png'
-        result_txt = '拼读错误，再试一次'
+        result_txt = '拼读错误，再试一次吧!'
       }
 
       that.setData({
@@ -450,7 +472,7 @@ Page({
     this.speaking()
 
     manager.start({
-      duration: 2000,
+      duration: 2500,
       lang: "en_US"
     })
     isRecord = true;
@@ -469,12 +491,13 @@ Page({
 
     var that = this
     setTimeout(function() {
+      console.log('manager stop--->')
       manager.stop();
       isRecord = false
       that.setData({
         tape_img: '../../images/word_bt_record.png'
       })
-    }, 300)
+    }, 2500)
   },
 
   playTape: function(e) {
@@ -672,9 +695,13 @@ Page({
   },
 
   /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function() {
-
+  * 用户点击右上角分享
+  */
+  onShareAppMessage: function () {
+    return {
+      title: '卡片式学单词，记忆快还有趣哦!',
+      path: '/pages/home/home',
+      imageUrl: '../../images/share_img.png'
+    }
   }
 })

@@ -6,7 +6,7 @@ page {
 
 swiper {
   width: 750rpx;
-  height: 920rpx;
+  height: 880rpx;
 }
 
 swiper-item {
@@ -85,12 +85,14 @@ swiper-item {
 
 .word-play-view {
   width: 80%;
-  height: 250rpx;
-  margin-top: 16rpx;
+  height: 220rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-left: 10%;
+  margin-top: 20rpx;
+  position: fixed;
+  bottom: 20rpx;
+  left: 10%;
   justify-content: space-around;
 }
 
@@ -302,4 +304,28 @@ input-holder {
   position: absolute;
   width: 180rpx;
   height: 139rpx;
+}
+
+.word-test-result {
+  width: 100%;
+  height: 50rpx;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  bottom: 260rpx;
+  left: 0;
+}
+
+.test-result-img {
+  width: 36rpx;
+  height: 36rpx;
+  margin-top: 7rpx;
+}
+
+.result-txt {
+  color: #e95151;
+  font-size: 32rpx;
+  margin-left: 10rpx;
 }

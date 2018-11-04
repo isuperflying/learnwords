@@ -1,6 +1,6 @@
 let wechat = require('../../utils/wechat.js');
 var baseUrl = 'https://www.antleague.com/'
-var qiniuUrl = 'https://www.antleague.com/'
+var qiniuUrl = 'https://antleague.com/'
 var plugin = requirePlugin("WechatSI")
 var util = require('../../utils/util.js') //引入微信自带的日期格式化
 let manager = plugin.getRecordRecognitionManager()
@@ -130,6 +130,8 @@ Page({
 
   swiperChange(e) {
     clearTimeout(timer)
+    isPlay = false
+
     let temp_index = e.detail.current
 
     if (current_system == 'android' || current_system == 'devtools') {
@@ -197,6 +199,7 @@ Page({
     var that = this
     currentObj = words[current_index]
     vowel_audio_src = qiniuUrl + 'words/mp3/' + currentObj.mp3_url
+    console.log('current mp3--->' + vowel_audio_src)
     word_name = currentObj.word.toLowerCase()
     timer = setTimeout(function() {
       that.setData({

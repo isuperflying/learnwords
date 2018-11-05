@@ -1,7 +1,7 @@
 const app = getApp()
 
 var baseUrl = 'https://www.antleague.com/'
-
+var qiniuUrl = 'https://antleague.com/'
 var list = null
 var page = 1
 var pSize = 20
@@ -12,7 +12,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    base_img_url: baseUrl + 'words/',
+    base_img_url: qiniuUrl + 'words/',
   },
 
   /**

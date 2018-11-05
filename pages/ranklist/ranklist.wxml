@@ -2,7 +2,7 @@
 <!-- <view class='top-view'>
   <view class='top-text'>拼读排行榜</view>
 </view> -->
-
+<view class='top-none-view'></view>
 <view wx:for='{{ranklist}}' wx:key='id' class='rank-item'>
   <view class='rank-number-view'>
     <block wx:if='{{index < 3}}'>

@@ -4,6 +4,10 @@ page {
   background: #78c8ff;
 }
 
+.top-none-view {
+  height: 20rpx;
+}
+
 .rank-wrapper {
   width: 100%;
   height: 100%;
@@ -37,7 +41,7 @@ page {
   flex-direction: row;
   align-items: center;
   justify-content: start;
-   margin-top: 20rpx;
+   margin-bottom: 20rpx;
    margin-left: 25rpx;
    border-radius: 10px;
    background: #cae9fc;

@@ -52,7 +52,7 @@ Page({
         app.globalData.current_system = res.platform
         console.log(res.platform)
 
-        let temp_height = res.windowHeight * res.pixelRatio * 0.3;
+        let temp_height = 550;
 
         let bottom = temp_height
         let x = 1

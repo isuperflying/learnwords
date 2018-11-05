@@ -54,9 +54,10 @@ Page({
     wx.getSystemInfo({
       success(res) {
         console.log(res.windowHeight * res.pixelRatio * 0.52)
+        console.log(res.windowHeight * res.pixelRatio * 0.42)
         that.setData({
-          sheight: res.windowHeight * res.pixelRatio * 0.52,
-          swiper_height: res.windowHeight * res.pixelRatio * 0.42,
+          sheight: 860,
+          swiper_height: 700,
         })
       }
     })

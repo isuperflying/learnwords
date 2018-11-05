@@ -5,6 +5,7 @@ var app = getApp();
 var userInfo
 var current_page = 1
 let list
+let is_exceed = false
 Page({
 
   /**
@@ -52,7 +53,9 @@ Page({
           that.setData({
             ranklist: list
           })
-
+          if(list.length >= 200){
+            is_exceed = true
+          }
         } else {
           wx.showToast({
             title: '数据异常，请重试',
@@ -81,8 +84,11 @@ Page({
      * 页面上拉触底事件的处理函数
      */
   onReachBottom: function () {
-    current_page++;
-    this.loadDataByPage();
+    if (!is_exceed){
+      current_page++;
+      this.loadDataByPage();
+    }
+    
   },
   
   /**

@@ -39,10 +39,34 @@ Page({
       title: '萌宝学单词'
     })
 
+    var animation = wx.createAnimation({
+      duration: 1000,
+      timingFunction: "ease",
+      delay: 0
+    })
+
+    var that = this
     wx.getSystemInfo({
       success(res) {
+        
         app.globalData.current_system = res.platform
         console.log(res.platform)
+
+        let temp_height = res.windowHeight * res.pixelRatio * 0.3;
+
+        let bottom = temp_height
+        let x = 1
+        setInterval(function () {
+          bottom = temp_height + Math.cos(x++) * 30
+          if (x > 1000) {
+            x = 1
+          }
+          animation.bottom(bottom + "rpx").step()
+          that.setData({
+            animationData: animation.export()
+          })
+        }.bind(that), 400)
+
       }
     })
 
@@ -54,26 +78,6 @@ Page({
       })
     }
 
-    var animation = wx.createAnimation({
-      duration: 1000,
-      timingFunction: "ease",
-      delay: 0
-    })
-
-    let bottom = 550
-    let x = 1
-    setInterval(function() {
-      bottom = 550 + Math.cos(x++) * 30
-      if (x > 1000) {
-        x = 1
-      }
-      animation.bottom(bottom + "rpx").step()
-      this.setData({
-        animationData: animation.export()
-      })
-    }.bind(this), 400)
-
-    var that = this
     wx.getSystemInfo({
       success: function(res) {
         console.log('sdk version--->' + res.SDKVersion)

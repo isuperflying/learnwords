@@ -69,7 +69,6 @@ page {
   height: 190rpx;
   position: fixed;
   left: 22rpx;
-  bottom: 450rpx;
 }
 
 .sign-img-btn {
@@ -77,7 +76,6 @@ page {
   height: 190rpx;
   position: fixed;
   left: 22rpx;
-  bottom: 450rpx;
   background: rgba(255,255,255,0);
 }
 
@@ -86,7 +84,6 @@ page {
   height: 190rpx;
   position: fixed;
   right: 22rpx;
-  bottom: 450rpx;
   z-index: 1;
 }
 
@@ -95,7 +92,6 @@ page {
   height: 190rpx;
   position: fixed;
   right: 22rpx;
-  bottom: 450rpx;
   background: rgba(255,255,255,0);
   z-index: 2;
 }
@@ -134,7 +130,6 @@ page {
   align-items: center;
   justify-content: center;
   position: absolute;
-  bottom: 550rpx;
   right: 155rpx;
 }
 

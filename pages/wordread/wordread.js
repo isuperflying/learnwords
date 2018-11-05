@@ -49,6 +49,17 @@ Page({
    */
   onLoad: function(options) {
     console.log('onLoad--->')
+    var that = this
+    
+    wx.getSystemInfo({
+      success(res) {
+        console.log(res.windowHeight * res.pixelRatio * 0.52)
+        that.setData({
+          sheight: res.windowHeight * res.pixelRatio * 0.52,
+          swiper_height: res.windowHeight * res.pixelRatio * 0.42,
+        })
+      }
+    })
 
     //当前的系统版本
     current_system = app.globalData.current_system

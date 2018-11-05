@@ -13,20 +13,20 @@
 <image class='rank-img' src='../../images/home_bt_ranking_list.png' bindtap='rank'></image>
 <button class='rank-login-btn' wx:if='{{!is_login}}' bindgetuserinfo='rank' open-type='getUserInfo'></button>
 
-<image class='sign-img' src='../../images/home_bt_sign_in.png' bindtap='todaySign'></image>
-<button class='sign-img-btn' wx:if='{{!is_login}}' bindgetuserinfo='todaySign' open-type='getUserInfo'></button>
+<image class='sign-img' style='bottom:35%' src='../../images/home_bt_sign_in.png' bindtap='todaySign'></image>
+<button class='sign-img-btn' style='bottom:35%' wx:if='{{!is_login}}' bindgetuserinfo='todaySign' open-type='getUserInfo'></button>
 
 <image class='about' src='../../images/about.png' bindtap='about'></image>
 
-<image class='keep-img' src='../../images/home_bt_favourite.png' bindtap='collect'></image>
-<button class='keep-login-btn' wx:if='{{!is_login}}' bindgetuserinfo='collect' open-type='getUserInfo'></button>
+<image class='keep-img' style='bottom:35%' src='../../images/home_bt_favourite.png' bindtap='collect'></image>
+<button class='keep-login-btn' style='bottom:35%' wx:if='{{!is_login}}' bindgetuserinfo='collect' open-type='getUserInfo'></button>
 
 <!-- <image class='store-img' src='../../images/home_bt_store.png' bindtap='store'></image> -->
 <image class='money-img' src='../../images/home_bt_money.png' bindtap='newApp'></image>
 <navigator class="nav-view" wx:if='{{isUse}}' target="miniProgram" open-type="navigate" app-id="{{new_app_id}}" ></navigator>
 
 
-<view class='bee-view' animation="{{animationData}}">
+<view class='bee-view' style='bottom:30%' animation="{{animationData}}">
   <view class='bee-wrapper'>
     <image class='bee-img' src='../../images/home_bg_bee.png' bindtap='basetrain'></image>
     <button class='bee-login-btn' wx:if='{{!is_login}}' bindgetuserinfo='userLogin' open-type='getUserInfo'></button>

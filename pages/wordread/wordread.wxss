@@ -6,7 +6,6 @@ page {
 
 swiper {
   width: 750rpx;
-  height: 880rpx;
 }
 
 swiper-item {
@@ -17,7 +16,6 @@ swiper-item {
 
 .slide-image-view-wrapper {
   width: 500rpx;
-  height: 720rpx;
   position: absolute;
   left: 5%;
   margin-left: 18rpx;
@@ -46,8 +44,8 @@ swiper-item {
 }
 
 .slide-image {
-  width: 500rpx;
-  height: 500rpx;
+  width: 450rpx;
+  height: 450rpx;
 }
 
 .slide-image-view-wrapper.active {
@@ -64,7 +62,7 @@ swiper-item {
 }
 
 .en-word {
-  font-size: 52rpx;
+  font-size: 48rpx;
   color: #000;
   font-weight: 500;
 }
@@ -89,7 +87,7 @@ swiper-item {
   display: flex;
   flex-direction: row;
   align-items: center;
-  margin-top: 20rpx;
+  margin-top: 10rpx;
   position: fixed;
   bottom: 20rpx;
   left: 10%;
@@ -314,7 +312,7 @@ input-holder {
   align-items: center;
   justify-content: center;
   position: fixed;
-  bottom: 260rpx;
+  bottom: 250rpx;
   left: 0;
 }
 

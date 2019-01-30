@@ -10,6 +10,9 @@ page {
   flex-direction: row;
   flex-wrap: wrap;
   background: #fff;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .wordtype-top-view {
@@ -25,7 +28,7 @@ page {
 
 .top-color {
   width: 10rpx;
-  height: 30rpx;
+  height: 42rpx;
   background: #ff7b7b;
   border-radius: 5px;
   margin-left: 50rpx;
@@ -33,21 +36,35 @@ page {
 
 .wordtype-top {
   color: #000;
-  font-size: 30rpx;
+  font-size: 38rpx;
   font-weight: 600;
   margin-left: 10rpx;
 }
 
-.wordtype-item {
+.wordtype-item-wrapper{
   width: 30%;
+  height: 260rpx;
+  margin-bottom: 24rpx;
+  margin-left: 20rpx;
+  position: relative;
+}
+
+.wordtype-item {
+  width: 100%;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   border-radius: 2px;
   justify-content: center;
   align-items: center;
-  margin-bottom: 24rpx;
-  margin-left: 18rpx;
+}
+
+.word-type-btn{
+  width: 100%;
+  height: 260rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 .wordtype-cover {
@@ -105,4 +122,9 @@ page {
   margin-left: 10%;
   border-radius: 3px;
   border: 1px solid #aaa;
+}
+
+button,button::after{
+  border: 0;
+  background: rgba(255, 255, 255, 0);
 }

@@ -179,12 +179,11 @@ swiper-item {
 }
 
 .vip-remark {
-  height: 80rpx;
   background: #fc696e;
   color: #fff;
   margin-left: 36rpx;
-  font-size: 32rpx;
-  margin-top: 30rpx;
+  font-size: 28rpx;
+  margin-top: 16rpx;
 }
 
 .viy-buy {
@@ -218,6 +217,14 @@ swiper-item {
   position: absolute;
   top: -22rpx;
   right: -22rpx;
+}
+
+.price-title {
+  width: 460rpx;
+  height: 92rpx;
+  position: absolute;
+  top: -28rpx;
+  left: 100rpx;
 }
 
 .modal-content {

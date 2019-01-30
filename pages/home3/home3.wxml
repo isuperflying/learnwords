@@ -1,0 +1,84 @@
+<!--pages/home1/home1.wxml-->
+<view class='content-view'>
+  <view class='user-info-view'>
+    <view class='sign-top-wrapper'>
+      <view class='sign-view' bindtap='todaySign'>
+        <image class='sign-day-img' src='../../images/sign_day.png'></image>
+        <text class='sign-txt'>签到</text>
+      </view>
+      <button class='sign-img-btn' style='bottom:40%' wx:if='{{!is_login}}' bindgetuserinfo='todaySign' open-type='getUserInfo'></button>
+    </view>
+    <view class='user-head-wrapper'>
+      <view class='user-head'>
+        <open-data type="userAvatarUrl"></open-data>
+      </view>
+      <open-data type="userNickName" class='nick-name'></open-data>
+    </view>
+    <view class='money-view'>
+      <image class='money-img' src='../../images/learn_money.png'></image>
+      <text class='money-txt'>学习币</text>
+    </view>
+  </view>
+
+  <view class='train-view'>
+    <view class='base-train-wrapper'>
+      <view class='base-train-img' bindtap='basetrain'>
+        基础训练
+      </view>
+      <!-- <image class='base-train-img' src='../../images/base_train.png' bindtap='basetrain'></image> -->
+      <button class='bee-login-btn' wx:if='{{!is_login}}' bindgetuserinfo='userLogin' open-type='getUserInfo'></button>
+    </view>
+    <view class='rank-wrapper'>
+      <!-- <image class='rank-img' src='../../images/rank_icon.png' bindtap='rank'></image> -->
+      <view class='rank-img' bindtap='basetrain'>
+        排行榜
+      </view>
+      <button class='rank-login-btn' wx:if='{{!is_login}}' bindgetuserinfo='rank' open-type='getUserInfo'></button>
+    </view>
+  </view>
+  <view class='keep-mail-view'>
+    <view class='my-keep-wrapper'>
+      <!-- <image class='my-keep-img' src='../../images/my_keep_icon.png'></image> -->
+      <view class='my-keep-img' bindtap='basetrain'>
+        收藏
+      </view>
+      <button class='keep-login-btn' style='bottom:40%' wx:if='{{!is_login}}' bindgetuserinfo='collect' open-type='getUserInfo'></button>
+    </view>
+    <!-- <image class='score-mail-img' src='../../images/score_mail.png'></image> -->
+    <view class='score-wrapper'>
+      <view class='score-mail-img' bindtap='basetrain'>
+          字母学习
+        </view>
+    </view>
+  </view>
+  <!-- <image class='about' src='../../images/about.png' bindtap='about'></image> -->
+</view>
+
+<!-- <image class='money-img' src='../../images/home_bt_money.png' bindtap='newApp'></image>
+<navigator class="nav-view" wx:if='{{isUse}}' target="miniProgram" open-type="navigate" app-id="{{new_app_id}}" ></navigator> -->
+
+<dialog isshow='{{show_dialog}}'>
+  <view class='dialog-bg'>
+      <image class='sign-top' src='../../images/sign_top.png'></image>
+      <image class='dialog-img' src='../../images/sign_dialog_bg.png'></image>
+      <view class='sign-days'>
+        <text class='sign-hint' wx:if='{{today <= 2}}'>连续签到3天可试用会员7天哦</text>
+        <block wx:if='{{today <= 2}}'>
+            <view wx:for='{{sign_days}}' wx:key='id' class="sign-day-item {{today == index ? 'today-sign':''}}">
+              <text class='current-day'>第{{item.day_num}}天</text>
+              <text wx:if='{{index < 2}}' class="current-score {{today == index ? 'today-score':''}}">+{{item.day_score}} 积分</text>
+              <text wx:if='{{index == 2}}' class="current-score {{today == index ? 'today-score':''}}">{{item.day_score}}</text>
+            </view>
+        </block>
+        <block wx:if='{{today > 2}}'>
+            <view class='sign-every-day'>
+                每日签到：积分+1
+            </view>
+        </block>
+      </view>
+      <view class="sign-btn {{today_is_sign?'sign-done':''}}" bindtap='signDay'>
+          签到
+      </view>
+  </view>
+  <image class='close-img' src='../../images/top_close1.png' bindtap='closeDialog'></image>
+</dialog>

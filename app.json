@@ -1,20 +1,22 @@
 {
   "pages": [
     "pages/home/home",
+    "pages/home5/home5",
+    "pages/wordtype/wordtype",
+    "pages/home2/home2",
+    "pages/home3/home3",
     "pages/wordread/wordread",
     "pages/testpay/testpay",
     "pages/wordread2/wordread2",
     "pages/ranklist/ranklist",
-    "pages/home2/home2",
     "pages/test2/test2",
-    "pages/wordtype/wordtype",
     "pages/about/about",
     "pages/index/index",
     "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
-    "navigationBarBackgroundColor": "#78c8ff",
+    "navigationBarBackgroundColor": "#79ceff",
     "navigationBarTitleText": "WeChat",
     "navigationBarTextStyle": "white",
     "onReachBottomDistance": 50

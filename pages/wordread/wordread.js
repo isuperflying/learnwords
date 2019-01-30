@@ -20,7 +20,7 @@ var tapeResult
 var tapeAudioPath //录音文件
 var last_index = -1
 var user_is_vip = false
-var free_read_count = 6
+var free_read_count = 4
 var userInfo
 
 var current_system
@@ -65,6 +65,7 @@ Page({
     //当前的系统版本
     current_system = app.globalData.current_system
     console.log(current_system)
+
     userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
     //user_is_vip = userInfo.is_vip == 1 ? true : false
     console.log(userInfo)
@@ -75,10 +76,11 @@ Page({
     if(userInfo.is_vip == 2 && ndate < userInfo.vip_end_date) {
       user_is_vip = true
     }
-
+    console.log(user_is_vip)
     var cid = options.cid
     //var cid = 7;
     console.log('cid--->' + cid)
+    console.log('openid--->' + userInfo.openId + '---token--->' + userInfo.token);
     wx.setNavigationBarTitle({
       title: options.cname || '萌宝学单词',
     })
@@ -138,6 +140,7 @@ Page({
     current_index = 0;
     vowel_audio_src = null;
     this.innerAudioContext = null;
+    this.data.musicStatus = "on"
   },
 
   swiperChange(e) {
@@ -145,7 +148,7 @@ Page({
     isPlay = false
 
     let temp_index = e.detail.current
-
+    console.log("temp_index--->" + temp_index)
     if (current_system == 'android' || current_system == 'devtools') {
       if (!user_is_vip && temp_index > free_read_count - 1) {
         this.setData({
@@ -175,7 +178,7 @@ Page({
         wx.showModal({
           title: '提醒',
           showCancel: false,
-          content: '请先评测学习，积分达标后，再继续后半部分学习',
+          content: '请先点击单词卡片的【录音】评测功能，获得积分并达到10积分后，才能继续后半部分学习',
           success(res) {
             if (res.confirm) {
               console.log(current_index)
@@ -331,6 +334,7 @@ Page({
   },
 
   playWord: function() {
+    console.log('playWord--->' + isPlay)
     if (isPlay) {
       this.stopMusic()
     } else {
@@ -395,7 +399,13 @@ Page({
           result_txt = '太棒了，继续加油哦!'
 
           //回答正确后，用户积分+1
-          app.globalData.user_score++;
+          //app.globalData.user_score++;
+          if (!userInfo.user_score){
+            userInfo.user_score = 1
+          }else{
+            userInfo.user_score++;
+          }
+
           that.updateUserScore();
         } else {
           result_img = '../../images/result_no.png'
@@ -429,7 +439,7 @@ Page({
       data: {
         openid: userInfo.openId,
         token: userInfo.token,
-        score: app.globalData.user_score
+        score: userInfo.user_score
       },
       success: function(res) {
         console.log(res.data)
@@ -628,6 +638,9 @@ Page({
   },
 
   vipBuy: function() {
+    wx.showLoading({
+      title: '请求中',
+    })
     var that = this
     wx.request({
       url: baseUrl + 'getpayinfo',
@@ -637,6 +650,7 @@ Page({
         token: userInfo.token
       },
       success: function(res) {
+        wx.hideLoading()
         console.log(res.data)
         if (res.data.code == 0) {
           var timestamp = res.data.data.timestamp + '' //时间戳
@@ -665,7 +679,7 @@ Page({
                 wechat.saveUserInfo(userInfo)
                 app.globalData.userInfo = userInfo
               }
-
+              isPlay = false;
               current_index++;
               that.setCurrentWord()
               that.setData({
@@ -689,6 +703,7 @@ Page({
         }
       },
       fail: function(err) {
+        
         console.log(err)
       }
     })

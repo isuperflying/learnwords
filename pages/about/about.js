@@ -40,5 +40,10 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    return {
+      title: '卡片式学单词，记忆快还有趣哦!',
+      path: '/pages/home/home',
+      imageUrl: '../../images/share_img.png'
+    }
   }
 })

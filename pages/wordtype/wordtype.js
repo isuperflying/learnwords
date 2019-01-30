@@ -1,5 +1,7 @@
-const app = getApp()
+let wechat = require('../../utils/wechat.js');
+var util = require('../../utils/util.js') //引入微信自带的日期格式化
 
+const app = getApp()
 var baseUrl = 'https://www.antleague.com/'
 var qiniuUrl = 'https://antleague.com/'
 var list = null
@@ -12,6 +14,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    is_login:false,
     base_img_url: qiniuUrl + 'words/',
   },
 
@@ -26,16 +29,30 @@ Page({
       title: '加载中',
     })
     userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
+    console.log(userInfo)
+    if (userInfo) {
+      this.setData({
+        is_login: true
+      })
+    }
+
+    wx.getSystemInfo({
+      success(res) {
+        app.globalData.current_system = res.platform
+        console.log(res.platform)
+      }
+    });
+
     this.loadData();
   },
 
   loadData: function() {
     var that = this
-    let url = baseUrl + 'querywordtypes'
+    let url = baseUrl + 'aquerywordtypes'
     wx.request({
       url: url,
       data: {
-        token: userInfo.token
+        //token: userInfo.token
       },
       method: 'POST',
       success: function(result) {
@@ -64,6 +81,29 @@ Page({
     })
   },
   
+  getUserInfo(cid,cname) {
+    var that = this
+    wechat.getCryptoData2()
+      .then(d => {
+        return wechat.getMyData(d);
+      })
+      .then(d => {
+        console.log("从后端获取的用户信息--->", d.data);
+        userInfo = d.data.data
+        wechat.saveUserInfo(userInfo)
+        app.globalData.userInfo = userInfo
+        that.data.is_login = true
+        
+        wx.navigateTo({
+          url: '/pages/wordread/wordread?cid=' + cid + '&cname=' + cname
+        })
+
+      })
+      .catch(e => {
+        console.log(e);
+      })
+  },
+
   /**
      * 页面相关事件处理函数--监听用户下拉动作
      */
@@ -76,9 +116,16 @@ Page({
   wordlist: function(e) {
     var cid = e.currentTarget.dataset.id
     var cname = e.currentTarget.dataset.cname
-    wx.navigateTo({
-      url: '/pages/wordread/wordread?cid=' + cid + '&cname=' + cname
-    })
+
+    userInfo = app.globalData.userInfo || wx.getStorageSync('user_info')
+
+    if (userInfo) {
+      wx.navigateTo({
+        url: '/pages/wordread/wordread?cid=' + cid + '&cname=' + cname
+      })
+    } else {
+      this.getUserInfo(cid,cname);
+    }
   },
 
   /**

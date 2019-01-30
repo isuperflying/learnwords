@@ -1,14 +1,16 @@
-
 <view class='wordtype-list'>
   <view class='wordtype-top-view'>
     <view class='top-color'></view>
     <text class='wordtype-top'>单词分类</text>
   </view>
   <block wx:for='{{wordlist}}' wx:key='id' wx:for-item="item">
-    <view class='wordtype-item' bindtap='wordlist' data-id='{{item.id}}' data-cname='{{item.cn_word}}'>
-      <image class='wordtype-cover' src='{{base_img_url + item.category_img}}' mode='aspectFill'></image>
-      <text class='en-wordtype'>{{item.en_word}}</text>
-      <text class='cn-wordtype'>{{item.cn_word}}</text>
+    <view class='wordtype-item-wrapper'>
+      <view class='wordtype-item' bindtap='wordlist' data-id='{{item.id}}' data-cname='{{item.cn_word}}'>
+        <image class='wordtype-cover' src='{{base_img_url + item.category_img}}' mode='aspectFill'></image>
+        <text class='en-wordtype'>{{item.en_word}}</text>
+        <text class='cn-wordtype'>{{item.cn_word}}</text>
+      </view>
+      <button class='word-type-btn' wx:if='{{!is_login}}' bindgetuserinfo='wordlist' data-id='{{item.id}}' data-cname='{{item.cn_word}}' open-type='getUserInfo'></button>
     </view>
   </block>
   <view class='bottom-view' wx:if='{{no}}'>

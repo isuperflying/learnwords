@@ -11,7 +11,7 @@
 		"newFeature": true
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.3.0",
+	"libVersion": "2.5.2",
 	"appid": "wx963826dfb4212295",
 	"projectname": "learnwords",
 	"isGameTourist": false,

@@ -48,8 +48,25 @@ Page({
     var that = this
     wx.getSystemInfo({
       success(res) {
+        
         app.globalData.current_system = res.platform
         console.log(res.platform)
+
+        let temp_height = 550;
+
+        let bottom = temp_height
+        let x = 1
+        setInterval(function () {
+          bottom = temp_height + Math.cos(x++) * 30
+          if (x > 1000) {
+            x = 1
+          }
+          animation.bottom(bottom + "rpx").step()
+          that.setData({
+            animationData: animation.export()
+          })
+        }.bind(that), 400)
+
       }
     })
 
@@ -76,7 +93,7 @@ Page({
     jump_type = 1
     this.getUserInfo();
   },
-
+  
   getUserInfo() {
     var that = this
     wechat.getCryptoData2()

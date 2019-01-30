@@ -1,0 +1,60 @@
+<!--pages/home1/home1.wxml-->
+<view class='content-view'>
+  <image src='../../images/home_bg01.png' class='bg1' mode='widthFix'></image>
+  <image src='../../images/home_bg02.png' class='bg2' mode='widthFix'></image>
+</view>
+<view class='user-head-wrapper'>
+  <view class='user-head'>
+    <open-data type="userAvatarUrl"></open-data>
+  </view>
+  <open-data type="userNickName" class='nick-name'></open-data>
+</view>
+
+<image class='rank-img' src='../../images/home_bt_ranking_list.png' bindtap='rank'></image>
+<button class='rank-login-btn' wx:if='{{!is_login}}' bindgetuserinfo='rank' open-type='getUserInfo'></button>
+
+<image class='sign-img' style='bottom:40%' src='../../images/home_bt_sign_in.png' bindtap='todaySign'></image>
+<button class='sign-img-btn' style='bottom:40%' wx:if='{{!is_login}}' bindgetuserinfo='todaySign' open-type='getUserInfo'></button>
+
+<image class='about' src='../../images/about.png' bindtap='about'></image>
+
+<image class='keep-img' style='bottom:40%' src='../../images/home_bt_favourite.png' bindtap='collect'></image>
+<button class='keep-login-btn' style='bottom:40%' wx:if='{{!is_login}}' bindgetuserinfo='collect' open-type='getUserInfo'></button>
+
+<!-- <image class='store-img' src='../../images/home_bt_store.png' bindtap='store'></image> -->
+<image class='money-img' src='../../images/home_bt_money.png' bindtap='newApp'></image>
+<navigator class="nav-view" wx:if='{{isUse}}' target="miniProgram" open-type="navigate" app-id="{{new_app_id}}" ></navigator>
+
+
+<view class='bee-view' style='bottom:550rpx' animation="{{animationData}}">
+  <view class='bee-wrapper'>
+    <image class='bee-img' src='../../images/home_bg_bee.png' bindtap='basetrain'></image>
+    <button class='bee-login-btn' wx:if='{{!is_login}}' bindgetuserinfo='userLogin' open-type='getUserInfo'></button>
+  </view>
+</view>
+
+<dialog isshow='{{show_dialog}}'>
+  <view class='dialog-bg'>
+      <image class='sign-top' src='../../images/sign_top.png'></image>
+      <image class='dialog-img' src='../../images/sign_dialog_bg.png'></image>
+      <view class='sign-days'>
+        <text class='sign-hint' wx:if='{{today <= 2}}'>连续签到3天可试用会员7天哦</text>
+        <block wx:if='{{today <= 2}}'>
+            <view wx:for='{{sign_days}}' wx:key='id' class="sign-day-item {{today == index ? 'today-sign':''}}">
+              <text class='current-day'>第{{item.day_num}}天</text>
+              <text wx:if='{{index < 2}}' class="current-score {{today == index ? 'today-score':''}}">+{{item.day_score}} 积分</text>
+              <text wx:if='{{index == 2}}' class="current-score {{today == index ? 'today-score':''}}">{{item.day_score}}</text>
+            </view>
+        </block>
+        <block wx:if='{{today > 2}}'>
+            <view class='sign-every-day'>
+                每日签到：积分+1
+            </view>
+        </block>
+      </view>
+      <view class="sign-btn {{today_is_sign?'sign-done':''}}" bindtap='signDay'>
+          签到
+      </view>
+  </view>
+  <image class='close-img' src='../../images/top_close1.png' bindtap='closeDialog'></image>
+</dialog>

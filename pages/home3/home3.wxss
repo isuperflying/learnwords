@@ -3,29 +3,7 @@
 page {
   width: 100%;
   height: 100%;
-  background: #79ceff;
-}
-
-.content-wrapper {
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
-
-.bg1 {
-  width: 750rpx;
-  height: 771rpx;
-  position: fixed;
-  top: 0rpx;
-  left: 0rpx;
-}
-
-.bg2 {
-  width: 750rpx;
-  height: 650rpx;
-  position: fixed;
-  top: 771rpx;
-  left: 0rpx;
+  background: #66ccff;
 }
 
 .content-view {
@@ -35,24 +13,24 @@ page {
   align-items: center;
   justify-content: flex-start;
   border-radius: 8px;
-  position: absolute;
-  left: 0;
 }
 
 .user-info-view {
   width: 90%;
-  height: 120rpx;
+  height: 200rpx;
+  background: #d4ebf7;
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: space-between;
+  justify-content: space-around;
+  margin-top: 30rpx;
   font-size: 30rpx;
   border-radius: 8px;
   padding: 12rpx;
 }
 
 .user-head-wrapper {
-  width: 100rpx;
+  width: 200rpx;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,8 +38,8 @@ page {
 }
 
 .user-head {
-  width: 72rpx;
-  height: 72rpx;
+  width: 100rpx;
+  height: 100rpx;
   border-radius: 50%;
   overflow: hidden;
   border: 4rpx solid #fff;
@@ -70,8 +48,7 @@ page {
 .nick-name {
   margin-top: 5rpx;
   font-size: 30rpx;
-  font-weight: bold;
-  color: #004357;
+  font-weight: 600;
 }
 
 .sign-top-wrapper {
@@ -87,15 +64,13 @@ page {
 }
 
 .sign-day-img {
-  width: 72rpx;
-  height: 72rpx;
+  width: 80rpx;
+  height: 80rpx;
 }
 
 .sign-txt {
-  margin-top: 5rpx;
-  font-size: 30rpx;
-  font-weight: bold;
-  color: #004357;
+  font-size: 28rpx;
+  color: #000;
 }
 
 .sign-img-btn {
@@ -324,8 +299,8 @@ button, button::after {
 
 .train-view {
   width: 90%;
-  height: 200rpx;
-  margin-top: 70%;
+  height: 256rpx;
+  margin-top: 58rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -334,55 +309,48 @@ button, button::after {
   border-radius: 8px;
 }
 
-.base-train-wrapper {
-  width: 180rpx;
-  height: 180rpx;
+.base-train-wrapper{
+  width: 450rpx;
+  height: 248rpx;
   position: relative;
 }
 
 .base-train-img {
-  width: 180rpx;
-  height: 180rpx;
-  color: #004357;
-  font-size: 36rpx;
-  display: flex;
-  font-weight: bold;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.common-img {
-  width: 120rpx;
-  height: 120rpx;
+  width: 445rpx;
+  height: 248rpx;
+  line-height: 248rpx;
+  background: #48d172;
+  border-radius: 16px;
+  text-align: center;
+  color: #fff;
+  font-size: 50rpx;
 }
 
 .bee-login-btn {
-  width: 180rpx;
-  height: 180rpx;
+  width: 450rpx;
+  height: 248rpx;
   position: absolute;
   top: 0;
   left: 0;
   background: rgba(255, 255, 255, 0);
 }
 
-.rank-wrapper {
-  width: 180rpx;
-  height: 180rpx;
+.rank-wrapper{
+  width: 239rpx;
+  height: 248rpx;
   position: relative;
 }
 
 .rank-img {
-  width: 180rpx;
-  height: 180rpx;
+  width: 219rpx;
+  height: 248rpx;
+  margin-left: 20rpx;
+  line-height: 248rpx;
+  background: #ffc545;
+  border-radius: 16px;
   text-align: center;
-  color: #004357;
-  font-size: 36rpx;
-  font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  color: #fff;
+  font-size: 50rpx;
 }
 
 .rank-login-btn {
@@ -396,7 +364,7 @@ button, button::after {
 
 .keep-mail-view {
   width: 90%;
-  height: 200rpx;
+  height: 256rpx;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -405,23 +373,22 @@ button, button::after {
   border-radius: 8px;
 }
 
-.my-keep-wrapper {
-  width: 180rpx;
-  height: 180rpx;
+.my-keep-wrapper{
+  width: 239rpx;
+  height: 248rpx;
   position: relative;
 }
 
 .my-keep-img {
-  width: 180rpx;
-  height: 180rpx;
+  width: 219rpx;
+  height: 248rpx;
+  margin-right: 20rpx;
+  line-height: 248rpx;
+  background: #fe947a;
+  border-radius: 16px;
   text-align: center;
-  color: #004357;
-  font-weight: bold;
-  font-size: 36rpx;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  color: #fff;
+  font-size: 50rpx;
 }
 
 .keep-login-btn {
@@ -434,60 +401,21 @@ button, button::after {
 }
 
 .score-wrapper {
-  width: 180rpx;
-  height: 180rpx;
+  width: 450rpx;
+  height: 248rpx;
   position: relative;
 }
 
 .score-mail-img {
-  width: 180rpx;
-  height: 180rpx;
+  width: 445rpx;
+  height: 248rpx;
+  line-height: 248rpx;
+  background: #e94b3f;
+  border-radius: 16px;
   text-align: center;
-  color: #004357;
-  font-size: 36rpx;
-  font-weight: bold;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-.score-nav-view {
-  width: 180rpx;
-  height: 180rpx;
+  color: #fff;
+  font-size: 50rpx;
   position: absolute;
-  left: 0;
   top: 0;
-  z-index: 2;
-}
-
-.call-kefu {
-  width: 200rpx;
-  font-size: 28rpx;
-  color: white;
-  position: fixed;
-  bottom: 30rpx;
-  text-align: center;
-  left: 275rpx;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  align-content: center;
-  justify-content: center;
-}
-
-.kefu-img {
-  width: 30rpx;
-  height: 30rpx;
-  margin-right: 6rpx;
-}
-
-.call-kefu-btn {
-  width: 200rpx;
-  height: 50rpx;
-  position: fixed;
-  bottom: 30rpx;
-  left: 275rpx;
-  z-index: 2;
-  background: rgba(255, 255, 255, 0)
+  left: 0;
 }

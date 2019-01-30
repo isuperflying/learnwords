@@ -1,0 +1,309 @@
+/* pages/home1/home1.wxss */
+
+page {
+  width: 100%;
+  height: 100%;
+}
+
+.content-view {
+  width: 100%;
+  height: 100%;
+  background: #1e1e1e;
+}
+
+.bg1 {
+  width: 750rpx;
+}
+
+.bg2 {
+  width: 750rpx;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+}
+
+.user-head-wrapper {
+  width: 80rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  top: 35rpx;
+  left: 335rpx;
+}
+
+.user-head {
+  width: 80rpx;
+  height: 80rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4rpx solid #fff;
+}
+
+.nick-name {
+  width: 400rpx;
+  margin-top: 5rpx;
+  font-size: 30rpx;
+  font-weight: 500;
+  text-align: center;
+}
+
+.rank-img {
+  width: 190rpx;
+  height: 190rpx;
+  position: fixed;
+  left: 22rpx;
+  top: 120rpx;
+}
+
+.rank-login-btn {
+  width: 190rpx;
+  height: 190rpx;
+  position: fixed;
+  left: 22rpx;
+  top: 120rpx;
+  background: rgba(255,255,255,0);
+}
+
+.sign-img {
+  width: 190rpx;
+  height: 190rpx;
+  position: fixed;
+  left: 22rpx;
+}
+
+.sign-img-btn {
+  width: 190rpx;
+  height: 190rpx;
+  position: fixed;
+  left: 22rpx;
+  background: rgba(255,255,255,0);
+}
+
+.keep-img {
+  width: 190rpx;
+  height: 190rpx;
+  position: fixed;
+  right: 22rpx;
+  z-index: 1;
+}
+
+.keep-login-btn {
+  width: 190rpx;
+  height: 190rpx;
+  position: fixed;
+  right: 22rpx;
+  background: rgba(255,255,255,0);
+  z-index: 2;
+}
+
+.store-img {
+  width: 220rpx;
+  height: 290rpx;
+  position: fixed;
+  right: 22rpx;
+  bottom: 420rpx;
+}
+
+.money-img {
+  width: 150rpx;
+  height: 200rpx;
+  position: fixed;
+  right: 30rpx;
+  top: 120rpx;
+  z-index: 1;
+}
+
+.nav-view {
+  width: 150rpx;
+  height: 200rpx;
+  position: fixed;
+  right: 30rpx;
+  top: 120rpx;
+  z-index: 2;
+}
+
+.bee-view {
+  width: 400rpx;
+  height: 400rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  right: 155rpx;
+}
+
+.bee-wrapper {
+  width: 390rpx;
+  height: 370rpx;
+  position: relative;
+}
+
+.bee-img {
+  width: 390rpx;
+  height: 370rpx;
+}
+
+.bee-login-btn {
+  width: 390rpx;
+  height: 370rpx;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(255,255,255,0);
+}
+
+button,button::after {
+  border: 0;
+}
+
+.bee-text-img {
+  width: 240rpx;
+  height: 70rpx;
+  position: absolute;
+  top: 280rpx;
+  left: 80rpx;
+}
+
+
+.dialog-bg {
+  width: 620rpx;
+  height: 580rpx;
+  position: relative;
+}
+
+.sign-top {
+  width: 600rpx;
+  height: 120rpx;
+  position: absolute;
+  left: 0;
+  top: -80rpx;
+}
+
+.dialog-img {
+  width: 620rpx;
+  height: 580rpx;
+}
+
+.close-img {
+  width: 80rpx;
+  height: 80rpx;
+  margin-top: 60rpx;
+}
+
+.sign-days {
+  width: 480rpx;
+  height: 360rpx;
+  display: flex;
+  flex-wrap: wrap;
+  position: absolute;
+  top: 72rpx;
+  left: 60rpx;
+  justify-content: center;
+}
+
+.sign-hint {
+  color: #a03d29;
+  font-size: 30rpx;
+  height: 50rpx;
+}
+
+.sign-day-item {
+  width: 122rpx;
+  height: 188rpx;
+  margin-left: 30rpx;
+  background: #ffe9c8;
+  border-radius: 10rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.sign-every-day {
+  width: 400rpx;
+  height: 188rpx;
+  background: #ffe9c8;
+  border-radius: 6rpx;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 60rpx;
+  font-size: 36rpx;
+  color: #a03d29;
+}
+
+
+.today-sign {
+  border: 4rpx solid #fe3f51;
+}
+
+.current-day {
+  font-size: 28rpx;
+  color: #fe3f51;
+}
+
+.current-score {
+  font-size: 26rpx;
+  color: #e64f4f;
+  margin-top: 10rpx;
+}
+
+.today-score {
+  color: #e64f4f;
+  font-weight: 600;
+}
+
+.sign-btn {
+  width: 380rpx;
+  height: 80rpx;
+  line-height: 80rpx;
+  text-align: center;
+  background: #ffbe40;
+  color: #fff;
+  font-weight: 600;
+  font-size: 38rpx;
+  position: absolute;
+  bottom: 15rpx;
+  border-radius: 20px;
+  left: 120rpx;
+  box-shadow: 1px 2px #f29c24;
+}
+
+.sign-done {
+  background: #b6b1b1;
+  box-shadow: 1px 2px #c9c6c6;
+}
+
+.sign-wrapper {
+  width: 100%;
+  height: 100rpx;
+  position: relative;
+}
+
+.sign-test-btn {
+  width: 100%;
+  height: 100rpx;
+}
+
+.sign-login-btn {
+  width: 100%;
+  height: 100rpx;
+  position: absolute;
+  left: 0;
+  top: 0;
+  background: rgba(255, 255, 255, 0);
+}
+
+.about {
+  width: 80rpx;
+  height: 80rpx;
+  position: fixed;
+  right: 22rpx;
+  top: 400rpx;
+  z-index: 1;
+  border-radius: 10px;
+}

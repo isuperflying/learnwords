@@ -59,7 +59,8 @@ Page({
       method: 'POST',
       data: {
         openid: userInfo.openId,
-        token: userInfo.token
+        token: userInfo.token,
+        keyindex: 0
       },
       success: function(res) {
         console.log(res.data)
@@ -139,7 +140,8 @@ Page({
       data: {
         openid: userInfo.openId,
         token: userInfo.token,
-        score: 11
+        score: 11,
+        keyindex: 0
       },
       success: function(res) {
         console.log(res.data)
@@ -169,7 +171,8 @@ Page({
       data: {
         openid: userInfo.openId,
         token: userInfo.token,
-        sdate: ndate
+        sdate: ndate,
+        keyindex: 0
       },
       success: function(res) {
         console.log(res.data)
@@ -228,7 +231,8 @@ Page({
       data: {
         openid: userInfo.openId,
         token: userInfo.token,
-        sdate: ndate
+        sdate: ndate,
+        keyindex: 0
       },
       success: function(res) {
         console.log(res.data)
@@ -260,7 +264,8 @@ Page({
       method: 'POST',
       data: {
         token: userInfo.token,
-        page: current_page
+        page: current_page,
+        keyindex: 0
       },
       success: function (res) {
         console.log(res.data)

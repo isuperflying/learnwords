@@ -23,11 +23,12 @@
   },
   "plugins": {
     "WechatSI": {
-      "version": "0.2.2",
+      "version": "0.2.3",
       "provider": "wx069ba97219f66d99"
     }
   },
-  "navigateToMiniProgramAppIdList":[
+  "navigateToMiniProgramAppIdList": [
     "wx181d47e91d301a20"
-  ]
+  ],
+  "sitemapLocation": "sitemap.json"
 }

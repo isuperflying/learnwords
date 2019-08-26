@@ -96,6 +96,7 @@ class Wechat {
    * @param {object} params 
    */
   static getMyData(params) {
+    params.keyindex = 0;
     let url = baseUrl + 'cryptdata';
     return this.request(url, params, "POST", "application/x-www-form-urlencoded");
   };

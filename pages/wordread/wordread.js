@@ -96,7 +96,8 @@ Page({
       data: {
         cid: cid,
         openid: userInfo.openId,
-        token: userInfo.token
+        token: userInfo.token,
+        keyindex: 0
       },
       method: 'POST',
       success: function(result) {
@@ -439,7 +440,8 @@ Page({
       data: {
         openid: userInfo.openId,
         token: userInfo.token,
-        score: userInfo.user_score
+        score: userInfo.user_score,
+        keyindex: 0
       },
       success: function(res) {
         console.log(res.data)
@@ -579,7 +581,8 @@ Page({
       data: {
         openid: userInfo.openId,
         token: userInfo.token,
-        wordId: that.data.words[current_index].id
+        wordId: that.data.words[current_index].id,
+        keyindex: 0
       },
       success: function(res) {
         console.log(res.data)
@@ -612,7 +615,8 @@ Page({
       data: {
         openid: userInfo.openId,
         token: userInfo.token,
-        wordId: that.data.words[current_index].id
+        wordId: that.data.words[current_index].id,
+        keyindex: 0
       },
       success: function(res) {
         console.log(res.data)
@@ -647,7 +651,8 @@ Page({
       method: 'POST',
       data: {
         openid: userInfo.openId,
-        token: userInfo.token
+        token: userInfo.token,
+        keyindex: 0
       },
       success: function(res) {
         wx.hideLoading()

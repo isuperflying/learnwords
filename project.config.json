@@ -15,6 +15,8 @@
 	"appid": "wx963826dfb4212295",
 	"projectname": "learnwords",
 	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,

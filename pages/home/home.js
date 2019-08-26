@@ -138,7 +138,8 @@ Page({
       data: {
         openid: userInfo.openId,
         token: userInfo.token,
-        sdate: ndate
+        sdate: ndate,
+        keyindex:0
       },
       success: function(res) {
         console.log(res.data)
@@ -197,7 +198,8 @@ Page({
       data: {
         openid: userInfo.openId,
         token: userInfo.token,
-        sdate: ndate
+        sdate: ndate,
+        keyindex: 0
       },
       success: function(res) {
         console.log(res.data)
@@ -245,7 +247,8 @@ Page({
       data: {
         openid: userInfo.openId,
         token: userInfo.token,
-        end_date: end_date
+        end_date: end_date,
+        keyindex: 0
       },
       success: function(res) {
         console.log(res.data)

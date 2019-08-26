@@ -53,6 +53,7 @@ Page({
       url: url,
       data: {
         //token: userInfo.token
+        keyindex: 0
       },
       method: 'POST',
       success: function(result) {

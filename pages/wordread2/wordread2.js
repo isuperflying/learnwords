@@ -48,7 +48,8 @@ Page({
     wx.request({
       url: url,
       data: {
-        'cid': cid
+        'cid': cid,
+        keyindex: 0
       },
       method: 'POST',
       success: function(result) {

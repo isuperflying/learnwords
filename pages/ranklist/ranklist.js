@@ -38,7 +38,8 @@ Page({
       method: 'POST',
       data: {
         token: userInfo.token,
-        page: current_page
+        page: current_page,
+        keyindex: 0
       },
       success: function (result) {
         //console.log(result.data)
